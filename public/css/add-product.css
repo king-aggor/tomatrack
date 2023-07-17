@@ -1,5 +1,6 @@
 /* styling add-product form */
 .add-product-container{
+    position: absolute;
     border: 1px solid;
     background-color: rgb(30, 70, 120);
     color: rgb(255, 255, 255);
@@ -7,6 +8,10 @@
     height: 200px;
     margin:auto;
     padding: 30px 10px;
+    right:35%;
+    left: 35%;
+    top: 150px;
+    /* display: none; */
 }
 
 form{

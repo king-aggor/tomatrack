@@ -7,6 +7,7 @@
       <section class="main">
         <%-include("../includes/role.ejs") %>
         <div class="products-container">
+          <h2 class="products-title">All Products</h2>
           <div class="add-product-container">
             <form action="/add-product" method="post">
               <div class="input-lable-container">
@@ -47,7 +48,6 @@
               <button class="add-product-btn" type="submit">Add Product</button>
             </form>
           </div>
-          <h2 class="products-title">All Products</h2>
           <table class="products-table">
             <tr class="products-heading-container">
               <th class="product-heading">Batch No.</th>
@@ -91,4 +91,4 @@
       </section>
     </main>
   </body>
-include("../includes/end.ejs")
+<%-include("../includes/end.ejs")%>
