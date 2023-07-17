@@ -1,0 +1,16 @@
+<div class="role-container">
+    <h2 class="role">
+        <%if(role==="farmer"){%>
+            Farmer
+        <%}else if(role==="wholesaler") {%> 
+            Wholesaler
+        <%}else if(role==="retailer") {%>
+            Retailer
+        <%}else if(role==="wholesaler") {%>
+            Wholesaler
+        <%}%> 
+    </h2>
+    <% if(path==="/farmer/all-products"){%>
+    <button type="submit" class="upload-btn">+UPLOAD PRODUCT</button>
+    <%}%>
+  </div>

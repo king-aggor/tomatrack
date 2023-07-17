@@ -1,0 +1,29 @@
+<header class="nav-container">
+  <h1 class="heading">Dashboard</h1>
+  <nav class="nav">
+    <ul>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/farmer/all-products' ? 'active' : '' %>"
+          href="/farmer/all-products"
+          >All Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/farmer/sold-products' ? 'active' : '' %>"
+          href="/farmer/sold-products"
+          >Sold Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/farmer/available-products' ? 'active' : '' %>"
+          href="/farmer/available-products"
+          >Available Products</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <button class="logout-btn" type="submit">Logout</button>
+</header>

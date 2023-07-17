@@ -1,0 +1,10 @@
+# includes
+head.ejs
+farmer-navigation.ejs
+end.ejs
+role.ejs
+
+# views
+all-products.ejs
+available-products.ejs
+sold-products.ejs
