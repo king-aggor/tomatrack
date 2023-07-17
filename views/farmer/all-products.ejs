@@ -6,6 +6,41 @@
       <section class="main">
         <%-include("../includes/role.ejs") %>
         <div class="products-container">
+          <div class="add-product-container">
+            <form action="/add-product" method="post">
+              <div class="input-lable-container">
+                <label for="batchNum">
+                  Batch No.
+                  <input type="number" name="batchNum" id="batchNum">
+                </label>
+              </div>
+              <div class="input-lable-container">
+                <label for="variety">
+                  Variety
+                  <input type="text" name="variety" id="variety">
+                </label>
+              </div>
+              <div class="input-lable-container">
+                <label for="weight">
+                  Weight (kg)
+                  <input type="number" name="weight" id="weight">
+                </label>
+              </div>
+              <div class="input-lable-container">
+                <label for="price">
+                  Price / kg
+                  <input type="number" name="price" id="price">
+                </label>
+              </div>
+              <div class="input-lable-container">
+                <label for="Harvest-date">
+                  Harvest Date
+                  <input type="date" name="harvestDate" id="harvestDate">
+                </label>
+              </div>
+              <button class="add-product-btn" type="submit">Add Product</button>
+            </form>
+          </div>
           <h2 class="products-title">All Products</h2>
           <table class="products-table">
             <tr class="products-heading-container">
