@@ -1,0 +1,39 @@
+/* styling add-product form */
+.add-product-container{
+    border: 1px solid;
+    background-color: rgb(30, 70, 120);
+    color: rgb(255, 255, 255);
+    width: 400px;
+    height: 200px;
+    margin:auto;
+    padding: 30px 10px;
+}
+
+form{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+label{
+    width: 150px;
+    margin: 10px 40px 10px 0;
+}
+input{
+    width: 150px;
+    height: 20px;
+    margin: 0 0 10px 0;
+    border-radius: 5px;
+}
+.add-product-btn{
+    border: none;
+    color:rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    color: rgb(30, 70, 120);
+    width: 150px;
+    height: 30px;
+    margin-top: 50px;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 1em;
+    box-shadow: 3px 3px 3px 0px rgb(0, 0, 0, 70%);
+}
