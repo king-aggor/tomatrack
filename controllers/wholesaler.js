@@ -24,3 +24,12 @@ exports.getPurchasedProducts = (req, res, next) => {
     title: "Purchased Products",
   });
 };
+
+// get products sold by wholesaler
+exports.getSoldProducts = (req, res, next) => {
+  res.render("wholesaler/sold-products", {
+    path: "/wholesale/sold-products",
+    role: "wholesaler",
+    title: "Sold Products",
+  });
+};
