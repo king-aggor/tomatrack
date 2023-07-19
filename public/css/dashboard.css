@@ -125,6 +125,16 @@
     border-radius: 7px;
     font-size:0.7em
 }
+.buy-btn{
+    border: none;
+    color:rgb(255, 255, 255);
+    background-color: rgb(30, 70, 120);
+    width: 50px;
+    padding: 2px;
+    border-radius: 7px;
+    font-size:0.7em
+}
+
 a:active,a.active{
     background-color: rgb(255, 255, 255);
     color:rgb(30, 70, 120);
