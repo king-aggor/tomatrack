@@ -19,4 +19,6 @@ app.set("views", "views");
 
 app.use("/farmer", farmerRoutes);
 
-app.listen(3030);
+app.listen(3030, () => {
+  console.log("listening on port 3030");
+});

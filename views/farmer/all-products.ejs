@@ -1,4 +1,5 @@
 <%-include("../includes/head.ejs") %>
+<script src="/js/main.js"></script>
 <link rel="stylesheet" href="/css/add-product.css">
   </head>
   <body>
@@ -6,9 +7,9 @@
       <%-include("../includes/farmer-navigation.ejs") %>
       <section class="main">
         <%-include("../includes/role.ejs") %>
-        <div class="products-container">
+        <div onclick="removeAddProduct()" class="products-container">
           <h2 class="products-title">All Products</h2>
-          <div class="add-product-container">
+          <div id="add-product-container" class="add-product-container">
             <form action="/add-product" method="post">
               <div class="input-lable-container">
                 <label for="batchNum">

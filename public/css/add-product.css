@@ -11,7 +11,8 @@
     right:35%;
     left: 35%;
     top: 150px;
-    /* display: none; */
+    /* visibility: hidden; */
+    display: none;
 }
 
 form{
