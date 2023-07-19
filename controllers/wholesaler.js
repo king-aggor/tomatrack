@@ -13,3 +13,11 @@ exports.getAllProducts = (req, res, next) => {
     role: "wholsaler",
   });
 };
+
+// get product purchased by wholesaler
+exports.getPurchasedProducts = (req, res, next) => {
+  res.render("wholesaler/purchased-products", {
+    path: "/wholesaler/purchased-products",
+    role: "wholsaler",
+  });
+};

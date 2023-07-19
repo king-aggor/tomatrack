@@ -3,6 +3,7 @@ const path = require("path");
 
 // local modules
 const farmerRoutes = require("./routes/farmer"); //importing wholesaler route
+const wholesalerRoutes = require("./routes/wholesaler");
 
 // third-party modules
 const express = require("express"); //importing express
@@ -18,6 +19,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use("/farmer", farmerRoutes);
+app.use("/wholesaler", wholesalerRoutes);
 
 app.listen(3030, () => {
   console.log("listening on port 3030");

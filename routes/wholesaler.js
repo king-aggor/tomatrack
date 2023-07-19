@@ -15,4 +15,7 @@ router.get("/available-products", wholesaleController.getAvailableProducts);
 // get path to all products of wholesalers
 router.get("/all-products", wholesaleController.getAllProducts);
 
+// get path to products purchased by wholesaler
+router.get("/purchased-products", wholesaleController.getPurchasedProducts);
+
 module.exports = router;
