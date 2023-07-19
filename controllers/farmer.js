@@ -3,6 +3,7 @@ exports.getFarmerAllProduts = (req, res, next) => {
   res.render("farmer/all-products", {
     path: "/farmer/all-products",
     role: "farmer",
+    title: "All Products",
   });
 };
 
@@ -11,6 +12,7 @@ exports.getFarmerSoldProducts = (req, res, next) => {
   res.render("farmer/sold-products", {
     path: "/farmer/sold-products",
     role: "farmer",
+    title: "Sold Products",
   });
 };
 
@@ -19,5 +21,6 @@ exports.getFarmerAvailableProducts = (req, res, next) => {
   res.render("farmer/available-products", {
     path: "/farmer/available-products",
     role: "farmer",
+    title: "Available Products",
   });
 };

@@ -1,0 +1,36 @@
+<header class="nav-container">
+  <h1 class="heading">Dashboard</h1>
+  <nav class="nav">
+    <ul>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/retailer/all-products' ? 'active' : '' %>"
+          href="/retailer/all-products"
+          >All Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/retailer/purchased-products' ? 'active' : '' %>"
+          href="/retailer/purchased-products"
+          >Puchased Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/retailer/sold-products' ? 'active' : '' %>"
+          href="/retailer/sold-products"
+          >Sold Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/retailer/available-products' ? 'active' : '' %>"
+          href="/retailer/available-products"
+          >Available Products</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <button class="logout-btn" type="submit">Logout</button>
+</header>
