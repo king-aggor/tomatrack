@@ -12,4 +12,7 @@ const router = express.Router();
 // get path to all products available to wholesalers
 router.get("/available-products", wholesaleController.getAvailableProducts);
 
+// get path to all products of wholesalers
+router.get("/all-products", wholesaleController.getAllProducts);
+
 module.exports = router;

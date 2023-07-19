@@ -5,3 +5,11 @@ exports.getAvailableProducts = (req, res, next) => {
     role: "wholesaler",
   });
 };
+
+// get all products of wholesalers
+exports.getAllProducts = (req, res, next) => {
+  res.render("wholesaler/all-products", {
+    path: "/wholesaler/all-products",
+    role: "wholsaler",
+  });
+};
