@@ -8,10 +8,10 @@ exports.getAllProducts = (req, res, next) => {
 };
 
 // get retailer purchased products
-exports.getPurchasedProducts = (req, res, next) => {
-  res.render("retailer/purchased-products", {
-    path: "/retailer/purchased-products",
+exports.getQRcodeGenerator = (req, res, next) => {
+  res.render("retailer/QRcode-generator", {
+    path: "/retailer/QRcode-generator",
     role: "retailer",
-    title: "All Products",
+    title: "QRcode Generator",
   });
 };

@@ -7,3 +7,11 @@ function displayAddProduct() {
 function removeAddProduct() {
   document.getElementById("add-product-container").style.display = "none";
 }
+
+// display QRcode on QRcode-generator page when page loads
+function displayQRcode() {
+  var qrc = new QRCode(
+    document.getElementById("qrcode"),
+    "http://product/111223"
+  );
+}

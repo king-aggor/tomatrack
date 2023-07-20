@@ -1,0 +1,19 @@
+<%-include("../includes/head.ejs") %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src = "/js/main.js"></script>
+</head>
+<body onload="displayQRcode()" >
+    <main class="dashboard">
+        <%-include("../includes/retailer-navigation.ejs") %>
+        <section class="main">
+            <%-include("../includes/role.ejs") %>
+            <div class="QRcode-container">
+                <div id="qrcode">
+                </div>
+                <h1 class="QRcode-title">BA5555</h1>
+                <button class="print-QRcode-btn">Click To Print QR Code</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -12,8 +12,8 @@ const router = express.Router();
 // path to retailer all products
 router.get("/all-products", retailerController.getAllProducts);
 
-// path to retailer purchased product
-router.get("/purchased-products", retailerController.getPurchasedProducts);
+// path to retailer QRcode generator
+router.get("/QRcode-generator", retailerController.getQRcodeGenerator);
 
 // export router
 module.exports = router;

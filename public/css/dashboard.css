@@ -134,6 +134,10 @@
     border-radius: 7px;
     font-size:0.7em
 }
+.buy-btn a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
 
 a:active,a.active{
     background-color: rgb(255, 255, 255);

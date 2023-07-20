@@ -8,3 +8,4 @@ role.ejs
 all-products.ejs
 available-products.ejs
 sold-products.ejs
+QRcode-generator.ejs
