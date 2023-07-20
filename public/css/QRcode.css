@@ -1,0 +1,23 @@
+.QRcode-container{
+    width: 350px;
+    margin: auto;
+}
+.center{
+    margin: 50px 20px;
+    border: 1px solid;
+    padding:20px;
+    background-color: rgba(30, 71, 120, 0.774);
+    border-radius: 10px;
+    text-align: center;
+}
+.print-QRcode-btn{
+    margin-top: 30px;
+    border: none;
+    color:rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    color: black;
+    width: 150px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 3px 3px 3px 0px rgb(0, 0, 0, 70%);
+}

@@ -4,6 +4,7 @@
 
 .dashboard{
     width: 100vw;
+    height: 100vh;
     display:flex;
 }
 
@@ -64,6 +65,7 @@
     justify-content:space-between;
     margin-top: 35px;
     padding-bottom: 10px;
+    height: 20px;
 }
 
 .role{
