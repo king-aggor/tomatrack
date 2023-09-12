@@ -9,11 +9,15 @@ const retailerRoutes = require("./routes/retailer"); //importing retailer routes
 // third-party modules
 const express = require("express"); //importing express
 const ejs = require("ejs");
+const bodyParser = require("body-parser");
 
 const app = express();
 
 // middleware pointing to public folder( To serve static files )
 app.use(express.static(path.join(__dirname, "public")));
+
+//middleware to use body-parser
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // set views engine
 app.set("view engine", "ejs");
