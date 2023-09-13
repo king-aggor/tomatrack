@@ -3,8 +3,8 @@ function displayAddProduct() {
   document.getElementById("add-product-container").style.display = "block";
 }
 
-// remove add product form when you click when you click anywhere inside the products-container
-function removeAddProduct() {
+// close add product when you click on the close icon
+function closeAddProduct() {
   document.getElementById("add-product-container").style.display = "none";
 }
 
@@ -14,4 +14,33 @@ function displayQRcode() {
     document.getElementById("qrcode"),
     "http://product/111223"
   );
+}
+
+// print QRcode
+// function printQRcode() {
+//   const { jsPDF } = window.jspdf;
+//   let doc = new jsPDF({
+//   });
+// }
+// document.getElementById("print-btn").onclick(printQRcode());
+
+function printQRcode() {
+  const { jsPDF } = window.jspdf;
+  var pdf = new jsPDF({
+    orientation: "landscape",
+    unit: "mm",
+    format: [84, 40],
+  });
+
+  pdf.setFontSize(15);
+  pdf.text("CraveCookie", 43, 20);
+
+  pdf.setFontSize(10);
+  pdf.text("Scan For Menu", 43, 25);
+
+  let base64Image = document.getElementById("qrcode");
+  console.log(base64Image);
+
+  // pdf.addImage(base64Image, "png", 0, 0, 40, 40);
+  pdf.save(base64Image, "generated.pdf");
 }
