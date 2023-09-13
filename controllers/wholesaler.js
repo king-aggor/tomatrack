@@ -1,9 +1,15 @@
+// local modules
+const Product = require("../models/product"); //importing Product class from product model
+
 // get all products avilable to wholesaler
 exports.getAvailableProducts = (req, res, next) => {
+  // declear variable to store fetched products (all fatmer products)
+  const products = Product.fetchAll();
   res.render("wholesaler/available-products", {
     path: "/wholesaler/available-products",
     role: "wholesaler",
     title: "Available Products",
+    prods: products,
   });
 };
 
