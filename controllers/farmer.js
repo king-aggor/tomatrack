@@ -1,6 +1,19 @@
+// local modules
+const Product = require("../models/product"); //importing Product class from product model
+
 // post add product( To post farmer's new product)
 exports.postAddProduct = (req, res, next) => {
-  console.log(req.body);
+  // create an instance of product class
+  const product = new Product(
+    req.body.batchNum,
+    req.body.variety,
+    req.body.weight,
+    req.body.price,
+    req.body.harvestDate
+  );
+  // save product to product array
+  product.save();
+  console.log(product);
   res.redirect("all-products");
 };
 

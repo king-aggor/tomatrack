@@ -8,4 +8,8 @@ module.exports = class Product {
     this.price = price;
     this.harvestDate = harvestDate;
   }
+  // function to save user input in product array
+  save() {
+    products.push(this);
+  }
 };
