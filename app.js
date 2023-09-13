@@ -13,16 +13,16 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+// set views engine
+app.set("view engine", "ejs");
+// set views folder
+app.set("views", "views");
+
 // middleware pointing to public folder( To serve static files )
 app.use(express.static(path.join(__dirname, "public")));
 
 //middleware to use body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// set views engine
-app.set("view engine", "ejs");
-// set views folder
-app.set("views", "views");
 
 // middleware to use farmerRoutes
 app.use("/farmer", farmerRoutes);

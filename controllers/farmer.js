@@ -1,3 +1,9 @@
+// post add product( To post farmer's new product)
+exports.postAddProduct = (req, res, next) => {
+  console.log(req.body);
+  res.redirect("all-products");
+};
+
 // get farmer all products( To display all produce of farmers)
 exports.getFarmerAllProduts = (req, res, next) => {
   res.render("farmer/all-products", {

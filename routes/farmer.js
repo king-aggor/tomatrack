@@ -10,6 +10,8 @@ const express = require("express"); //importing express
 // use the Router function on express and assign to router
 const router = express.Router();
 
+// post path to add product
+router.post("/add-product", farmerController.postAddProduct);
 // get path to all farmer's products
 router.get("/all-products", farmerController.getFarmerAllProduts);
 // get path to farmer's sold products
