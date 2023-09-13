@@ -13,16 +13,20 @@ exports.postAddProduct = (req, res, next) => {
   );
   // save product to product array
   product.save();
-  console.log(product);
+  // console.log(product);
   res.redirect("all-products");
 };
 
 // get farmer all products( To display all produce of farmers)
 exports.getFarmerAllProduts = (req, res, next) => {
+  // declear varible to store fetched products
+  const products = Product.fetchAll();
+  console.log(products);
   res.render("farmer/all-products", {
     path: "/farmer/all-products",
     role: "farmer",
     title: "All Products",
+    prods: products,
   });
 };
 

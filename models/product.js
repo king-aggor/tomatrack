@@ -12,4 +12,9 @@ module.exports = class Product {
   save() {
     products.push(this);
   }
+
+  //   function to fetch products from products array
+  static fetchAll() {
+    return products;
+  }
 };

@@ -52,6 +52,7 @@
               <button class="add-product-btn" type="submit">Add Product</button>
             </form>
           </div>
+          <% if(prods.length > 0) {%>   
           <table class="products-table">
             <tr class="products-heading-container">
               <th class="product-heading">Batch No.</th>
@@ -60,7 +61,19 @@
               <th class="product-heading">Weight(kg)</th>
               <th class="product-heading">Price/kg</th>
             </tr>
+            <% for(let product of prods){%> 
             <tr class="products-info-container">
+              <td class="products-info"><%= product.batchNum %></td>
+              <td class="products-info"><%= product.harvestDate %></td>
+              <td class="products-info"><%= product.variety %></td>
+              <td class="products-info"><%= product.weight %></td>
+              <td class="products-info">GHc <%= product.price %></td>
+              <td class="products-info">
+                <button class="del-btn" type="submit">Delete</button>
+              </td>
+            </tr>
+            <% }%>
+            <!-- <tr class="products-info-container">
               <td class="products-info">BA5555</td>
               <td class="products-info">09-06-2023</td>
               <td class="products-info">Power Rano</td>
@@ -79,19 +92,12 @@
               <td class="products-info">
                 <button class="del-btn" type="submit">Delete</button>
               </td>
-            </tr>
-            <tr class="products-info-container">
-              <td class="products-info">BA5555</td>
-              <td class="products-info">09-06-2023</td>
-              <td class="products-info">Power Rano</td>
-              <td class="products-info">1000</td>
-              <td class="products-info">GHc300</td>
-              <td class="products-info">
-                <button class="del-btn" type="submit">Delete</button>
-              </td>
-            </tr>
+            </tr> -->
           </table>
+          <%} else{ %>
         </div>
+          <h1>NO PRODUCTS</h1>
+          <% }%>
       </section>
     </main>
   </body>
