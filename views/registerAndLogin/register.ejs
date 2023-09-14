@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/register.css" />
+    <title>Registration Page</title>
+  </head>
+  <body>
+    <div class="registration-container">
+      <div class="left-column">
+        <div class="left-column-image-container">
+          <img src="images/blockchain.png" alt="blockchain" />
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="image-outer-container">
+          <div class="right-column-image-container">
+            <img src="images/blockchain-logo.jpg" alt="" />
+          </div>
+        </div>
+        <div class="registration-form-container">
+          <section class="form-heading">
+            <h1 class="form-heading-text">Register</h1>
+          </section>
+          <form action="" method="post">
+            <div class="role">
+              <label for="role">Role<span>*</span></label>
+              <select name="role" id="role">
+                <option value="Farmer">Farmer</option>
+                <option value="Wholesaler">Wholesaler</option>
+                <option value="Distributor">Distributor</option>
+                <option value="Retailer">Retailer</option>
+              </select>
+            </div>
+            <div class="organization-name">
+              <label for="organization-name"
+                >Name of Organization<span>*</span></label
+              >
+              <input type="text" name="name" id="name" />
+            </div>
+            <div class="email">
+              <label for="email">Email<span>*</span></label>
+              <input type="email" name="email" id="email" />
+            </div>
+            <div class="country">
+              <label for="country">Country<span>*</span></label>
+              <select name="country" id="country">
+                <option value="Ghana">Ghana</option>
+              </select>
+            </div>
+            <div class="region">
+              <label for="region">Region<span>*</span></label>
+              <select name="region" id="region">
+                <option value="Greater Accra">Greater Accra</option>
+                <option value="Ashanti">Ashanti</option>
+                <option value="Bono">Bono</option>
+                <option value="Bono East">Bono East</option>
+                <option value="Central">Central</option>
+                <option value="Ahafo">Ahafo</option>
+                <option value="Eastern">Eastern</option>
+                <option value="Northen">Northen</option>
+                <option value="Savannah">Savannah</option>
+                <option value="North East">North East</option>
+                <option value="Upper East">Upper East</option>
+                <option value="Upper West">Upper West</option>
+                <option value="Volta">Volta</option>
+                <option value="Oti">Oti</option>
+                <option value="Western">Western</option>
+                <option value="Western North">Western North</option>
+              </select>
+            </div>
+            <div class="password">
+              <label for="password">Password<span>*</span></label>
+              <input type="password" name="password" id="password" />
+            </div>
+            <div class="password">
+              <label for="confirm-password"
+                >confirm-password<span>*</span></label
+              >
+              <input
+                type="password"
+                name="confirm-password"
+                id="confirm-password"
+              />
+            </div>
+            <div class="submit-button">
+              <button type="submit">Submit</button>
+            </div>
+          </form>
+          <a href="http://">already have an account? Login Here</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

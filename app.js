@@ -5,8 +5,8 @@ const path = require("path");
 const farmerRoutes = require("./routes/farmer"); //importing farmer route
 const wholesalerRoutes = require("./routes/wholesaler"); //importing wholesaler route
 const retailerRoutes = require("./routes/retailer"); //importing retailer routes
-
 const staticPagesRoutes = require("./routes/staticpages"); //importing staticPages routes
+const registerAndLoginRoutes = require("./routes/registerAndLogin"); //importing register&loging routes
 
 // third-party modules
 const express = require("express"); //importing express
@@ -28,6 +28,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // middleware to use staticPagesRoutes
 app.use(staticPagesRoutes);
+
+// middleware to use registerAndLoginRoutes
+app.use(registerAndLoginRoutes);
 
 // middleware to use farmerRoutes
 app.use("/farmer", farmerRoutes);
