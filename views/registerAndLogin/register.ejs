@@ -27,6 +27,7 @@
             <div class="role">
               <label for="role">Role<span>*</span></label>
               <select name="role" id="role">
+                <option value="" disabled selected hidden>select role</option>
                 <option value="Farmer">Farmer</option>
                 <option value="Wholesaler">Wholesaler</option>
                 <option value="Distributor">Distributor</option>
@@ -37,21 +38,39 @@
               <label for="organization-name"
                 >Name of Organization<span>*</span></label
               >
-              <input type="text" name="name" id="name" />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="enter name of organization"
+                required
+              />
             </div>
             <div class="email">
               <label for="email">Email<span>*</span></label>
-              <input type="email" name="email" id="email" />
+              <input
+                type="email"
+                name="email"
+                id="email"
+                required
+                placeholder="enter email"
+              />
             </div>
             <div class="country">
               <label for="country">Country<span>*</span></label>
-              <select name="country" id="country">
+              <select name="country" id="country" required>
+                <option value="" disabled selected hidden>
+                  select country
+                </option>
                 <option value="Ghana">Ghana</option>
               </select>
             </div>
             <div class="region">
               <label for="region">Region<span>*</span></label>
-              <select name="region" id="region">
+              <select name="region" id="region" required>
+                <option value="" disabled selected hidden>
+                  select a region in Ghana
+                </option>
                 <option value="Greater Accra">Greater Accra</option>
                 <option value="Ashanti">Ashanti</option>
                 <option value="Bono">Bono</option>
@@ -72,7 +91,13 @@
             </div>
             <div class="password">
               <label for="password">Password<span>*</span></label>
-              <input type="password" name="password" id="password" />
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="enter password"
+                required
+              />
             </div>
             <div class="password">
               <label for="confirm-password"
@@ -82,6 +107,8 @@
                 type="password"
                 name="confirm-password"
                 id="confirm-password"
+                placeholder="confirm password"
+                required
               />
             </div>
             <div class="submit-button">
