@@ -1,3 +1,4 @@
+// array to store products
 const products = [];
 
 module.exports = class Product {

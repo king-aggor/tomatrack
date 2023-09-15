@@ -8,6 +8,8 @@ const router = express.Router();
 
 // path to registration page
 router.get("/registration", registerAndLoginController.getRegistration);
+// path to post registration
+router.post("/registration", registerAndLoginController.postRegistration);
 // path to login page
 router.get("/login", registerAndLoginController.getLogin);
 

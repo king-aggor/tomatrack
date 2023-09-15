@@ -3,7 +3,7 @@ const Product = require("../models/product"); //importing Product class from pro
 
 // post add product( To post farmer's new product)
 exports.postAddProduct = (req, res, next) => {
-  // create an instance of product class
+  // create an instance of Product class
   const product = new Product(
     req.body.batchNum,
     req.body.variety,
