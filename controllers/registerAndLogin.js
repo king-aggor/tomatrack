@@ -8,31 +8,31 @@ exports.getRegistration = (req, res, next) => {
 
 // post registration
 exports.postRegistration = (req, res, next) => {
-  // create an instace of User class
-  const user = new User(
-    null,
-    req.body.role,
-    req.body.name,
-    req.body.email,
-    req.body.country,
-    req.body.region,
-    req.body.password
-  );
-  // save user to user array
-  user.save();
-
-  console.log(user);
-  let role = user.role;
-
-  if (role == "Farmer") {
-    res.redirect("farmer/all-products");
-  } else if (role == "Wholesaler") {
-    res.redirect("wholesaler/all-products");
-  } else if (role == "Distributor") {
-    res.redirect("distributor/all-products");
-  } else {
-    res.redirect("wholesaler/all-products");
-  }
+  // create and store new user
+  User.create({
+    orgName: req.body.name,
+    roles: { User: req.body.role },
+    email: req.body.email,
+    country: req.body.country,
+    region: req.body.region,
+    password: req.body.password,
+  })
+    .then((user) => {
+      console.log(user);
+      const role = user.roles;
+      if (role == "Farmer") {
+        res.redirect("farmer/all-products");
+      } else if (role == "Wholesaler") {
+        res.redirect("wholesaler/all-products");
+      } else if (role == "Distributor") {
+        res.redirect("distributor/all-products");
+      } else {
+        res.redirect("wholesaler/all-products");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // get login page
