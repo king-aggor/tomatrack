@@ -12,6 +12,8 @@ router.get("/registration", registerAndLoginController.getRegistration);
 router.post("/registration", registerAndLoginController.postRegistration);
 // path to login page
 router.get("/login", registerAndLoginController.getLogin);
+// path to post login
+router.post("/login", registerAndLoginController.postLogin);
 
 // exporting router
 module.exports = router;

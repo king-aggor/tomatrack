@@ -1,41 +1,154 @@
 // local modules
-const Product = require("../models/product"); //importing Product class from product model
+const product = require("../models/product");
+const Product = require("../models/product"); //importing Product model
+const User = require("../models/user"); // importing User model
 
 // get all products avilable to wholesaler
 exports.getAvailableProducts = (req, res, next) => {
-  // declear variable to store fetched products (all fatmer products)
-  const products = Product.fetchAll();
-  res.render("wholesaler/available-products", {
-    path: "/wholesaler/available-products",
-    role: "wholesaler",
-    title: "Available Products",
-    prods: products,
-  });
+  const userId = req.params.userId;
+  User.findById(userId)
+    .then((user) => {
+      // console.log(user.orgName);
+      Product.find({
+        "farmer.User": { $exists: true },
+        "wholesaler.purchased": false,
+      })
+        .then((products) => {
+          // console.log(products);
+          res.render("wholesaler/available-products", {
+            path: "/wholesaler/available-products",
+            role: "wholesaler",
+            title: "Available Products",
+            prods: products,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // get all products of wholesalers
 exports.getAllProducts = (req, res, next) => {
-  res.render("wholesaler/all-products", {
-    path: "/wholesaler/all-products",
-    role: "wholesaler",
-    title: "All Products",
+  const userId = req.params.userId;
+  User.findById(userId)
+    .then((user) => {
+      const wholesalerId = user._id;
+      Product.find({ "wholesaler.User": wholesalerId })
+        .then((products) => {
+          res.render("wholesaler/all-products", {
+            path: "/wholesaler/all-products",
+            role: "wholesaler",
+            title: "All Products",
+            prods: products,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// post buy product
+exports.postBuyProduct = (req, res, next) => {
+  const prodId = req.body.batchNum;
+  console.log(prodId);
+  Product.updateOne(
+    { batchNum: prodId },
+    {
+      $set: {
+        "wholesaler.User": "6512f9fbac8aea390a33b783",
+        "wholesaler.purchased": true,
+      },
+    }
+  ).then((product) => {
+    console.log(product);
+    res.redirect("available-products");
   });
 };
 
 //  get product purchased by wholesaler
 exports.getPurchasedProducts = (req, res, next) => {
-  res.render("wholesaler/purchased-products", {
-    path: "/wholesaler/purchased-products",
-    role: "wholesaler",
-    title: "Purchased Products",
-  });
+  const wholesalerId = "6512f9fbac8aea390a33b783";
+  User.findById(wholesalerId)
+    .then((user) => {
+      Product.find({
+        "wholesaler.User": wholesalerId,
+        "wholesaler.purchased": true,
+      })
+        .then((products) => {
+          for (let farmer of products) {
+            User.find({ _id: farmer.farmer.User })
+              .then((farmers) => {
+                console.log(farmers);
+                res.render("wholesaler/purchased-products", {
+                  path: "/wholesaler/purchased-products",
+                  role: "wholesaler",
+                  title: "Purchased Products",
+                  prods: products,
+                  user: user,
+                  farmers: farmers,
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 // get products sold by wholesaler
 exports.getSoldProducts = (req, res, next) => {
-  res.render("wholesaler/sold-products", {
-    path: "/wholesale/sold-products",
-    role: "wholesaler",
-    title: "Sold Products",
-  });
+  User.findById("6512f9fbac8aea390a33b783")
+    .then((user) => {
+      const wholesalerId = user._id;
+      Product.find({
+        "wholesaler.User": wholesalerId,
+        "distributor.purchased": true,
+      })
+        .then((products) => {
+          for (let distributor of products) {
+            User.find({ _id: distributor.distributor.User })
+              .then((distributors) => {
+                res.render("wholesaler/sold-products", {
+                  path: "/wholesale/sold-products",
+                  role: "wholesaler",
+                  title: "Sold Products",
+                  prods: products,
+                  user: user,
+                  distributors: distributors,
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // res.render("wholesaler/sold-products", {
+  //   path: "/wholesale/sold-products",
+  //   role: "wholesaler",
+  //   title: "Sold Products",
+  // });
 };

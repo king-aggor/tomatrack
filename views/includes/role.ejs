@@ -1,13 +1,13 @@
 <div class="role-container">
     <h2 class="role">
         <%if(role==="farmer"){%>
-            Farmer
+            Farmer - <%-stakeholder.orgName%>
         <%}else if(role==="wholesaler") {%> 
-            Wholesaler
+            Wholesaler - <%-stakeholder.orgName %>
         <%}else if(role==="retailer") {%>
             Retailer
-        <%}else if(role==="wholesaler") {%>
-            Wholesaler
+        <%}else if(role==="distributor") {%>
+            Distributor - <%-stakeholder.orgName %>
         <%}%> 
     </h2>
     <% if(path==="/farmer/all-products"){%>

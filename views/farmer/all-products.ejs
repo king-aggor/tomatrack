@@ -4,16 +4,16 @@
   </head>
   <body>
     <main class="dashboard">
-      <%-include("../includes/farmer-navigation.ejs") %>
+      <%-include("../includes/farmer-navigation.ejs", {user: user}) %>
       <section class="main">
-        <%-include("../includes/role.ejs") %>
+        <%-include("../includes/role.ejs", {stakeholder: user}) %>
         <div class="products-container">
           <h2 class="products-title">All Products</h2>
           <div id="add-product-container" class="add-product-container">
             <div class="close-button-container">
               <i onclick="closeAddProduct()" id="close-button" class="fa-solid fa-xmark"></i>
             </div>
-            <form action="/farmer/add-product" method="post">
+            <form action='/farmer/add-product' method="post">
               <div class="input-lable-container">
                 <label for="batchNum">
                   Batch No.
@@ -64,35 +64,18 @@
             <% for(let product of prods){%> 
             <tr class="products-info-container">
               <td class="products-info"><%= product.batchNum %></td>
-              <td class="products-info"><%= product.harvestDate %></td>
+              <td class="products-info"><%= product.harvestDate.toDateString() %></td>
               <td class="products-info"><%= product.variety %></td>
               <td class="products-info"><%= product.weight %></td>
               <td class="products-info">GHc <%= product.price %></td>
               <td class="products-info">
-                <button class="del-btn" type="submit">Delete</button>
+                <form action="/farmer/delete-product" method="post">
+                  <input type="hidden" value="<%= product._id %>" name="productId">
+                  <button class="del-btn" type="submit">Delete</button>
+                </form>
               </td>
             </tr>
             <% }%>
-            <!-- <tr class="products-info-container">
-              <td class="products-info">BA5555</td>
-              <td class="products-info">09-06-2023</td>
-              <td class="products-info">Power Rano</td>
-              <td class="products-info">1000</td>
-              <td class="products-info">GHc300</td>
-              <td class="products-info">
-                <button class="del-btn" type="submit">Delete</button>
-              </td>
-            </tr>
-            <tr class="products-info-container">
-              <td class="products-info">BA5555</td>
-              <td class="products-info">09-06-2023</td>
-              <td class="products-info">Power Rano</td>
-              <td class="products-info">1000</td>
-              <td class="products-info">GHc300</td>
-              <td class="products-info">
-                <button class="del-btn" type="submit">Delete</button>
-              </td>
-            </tr> -->
           </table>
           <%} else{ %>
         </div>
