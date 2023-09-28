@@ -2,9 +2,9 @@
 </head>
 <body>
     <main class="dashboard">
-        <%-include("../includes/wholesaler-navigation.ejs") %>
+        <%-include("../includes/wholesaler-navigation.ejs", {user: user}) %>
         <section class="main">
-            <%-include("../includes/role.ejs") %>
+            <%-include("../includes/role.ejs",{stakeholder: user}) %>
             <div class="products-container">
                 <h2 class="products-title">Available Products</h2>
                 <% if(prods.length > 0){%> 
@@ -16,38 +16,22 @@
                     <th class="product-heading">Weight(kg)</th>
                     <th class="product-heading">Price/kg</th>
                   </tr>
-                  <% for(let products of prods){%>
+                  <% for(let product of prods){%>
                   <tr class="products-info-container">
-                    <td class="products-info"><%= products.batchNum %></td>
-                    <td class="products-info"><%= products.harvestDate %></td>
-                    <td class="products-info"><%= products.variety %></td>
-                    <td class="products-info"><%= products.weight %></td>
-                    <td class="products-info">GHc <%= products.price %></td>
+                    <td class="products-info"><%= product.batchNum %></td>
+                    <td class="products-info"><%= product.harvestDate.toDateString() %></td>
+                    <td class="products-info"><%= product.variety %></td>
+                    <td class="products-info"><%= product.weight %></td>
+                    <td class="products-info">GHc <%= product.price %></td>
                     <td class="products-info">
-                      <button class="buy-btn" type="submit">Buy</button>
+                      <form action="/wholesaler/buy-product" method="post">
+                        <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
+                        <input type="hidden" value="<%=user._id%>" name="userId">
+                        <button class="buy-btn" type="submit">Buy</button>
+                      </form>
                     </td>
                   </tr>
                   <% }%>
-                  <!-- <tr class="products-info-container">
-                    <td class="products-info">BA5555</td>
-                    <td class="products-info">09-06-2023</td>
-                    <td class="products-info">Power Rano</td>
-                    <td class="products-info">1000</td>
-                    <td class="products-info">GHc300</td>
-                    <td class="products-info">
-                      <button class="buy-btn" type="submit">Buy</button>
-                    </td>
-                  </tr>
-                  <tr class="products-info-container">
-                    <td class="products-info">BA5555</td>
-                    <td class="products-info">09-06-2023</td>
-                    <td class="products-info">Power Rano</td>
-                    <td class="products-info">1000</td>
-                    <td class="products-info">GHc300</td>
-                    <td class="products-info">
-                      <button class="buy-btn" type="submit">Buy</button>
-                    </td>
-                  </tr> -->
                 </table>
                 <%}else{%> 
                   <h1>No Products Available For Sale</h1>

@@ -5,28 +5,28 @@
       <li class="nav-item">
         <a
           class="<%= path === '/wholesaler/all-products' ? 'active' : '' %>"
-          href="/wholesaler/all-products"
+          href="/wholesaler/all-products/<%= user._id%>"
           >All Products</a
         >
       </li>
       <li class="nav-item">
         <a
           class="<%= path === '/wholesaler/purchased-products' ? 'active' : '' %>"
-          href="/wholesaler/purchased-products"
+          href="/wholesaler/purchased-products/<%= user._id%>"
           >Puchased Products</a
         >
       </li>
       <li class="nav-item">
         <a
           class="<%= path === '/wholesale/sold-products' ? 'active' : '' %>"
-          href="/wholesaler/sold-products"
+          href="/wholesaler/sold-products/<%= user._id%>"
           >Sold Products</a
         >
       </li>
       <li class="nav-item">
         <a
           class="<%= path === '/wholesaler/available-products' ? 'active' : '' %>"
-          href="/wholesaler/available-products"
+          href="/wholesaler/available-products/<%= user._id%>"
           >Available Products</a
         >
       </li>

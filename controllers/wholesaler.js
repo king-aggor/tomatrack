@@ -1,5 +1,5 @@
 // local modules
-const product = require("../models/product");
+// const product = require("../models/product");
 const Product = require("../models/product"); //importing Product model
 const User = require("../models/user"); // importing User model
 
@@ -60,24 +60,26 @@ exports.getAllProducts = (req, res, next) => {
 // post buy product
 exports.postBuyProduct = (req, res, next) => {
   const prodId = req.body.batchNum;
-  console.log(prodId);
+  const userId = req.body.userId;
+  // console.log(prodId);
+  // console.log(userId);
   Product.updateOne(
     { batchNum: prodId },
     {
       $set: {
-        "wholesaler.User": "6512f9fbac8aea390a33b783",
+        "wholesaler.User": userId,
         "wholesaler.purchased": true,
       },
     }
   ).then((product) => {
     console.log(product);
-    res.redirect("available-products");
+    res.redirect(`available-products/${userId}`);
   });
 };
 
 //  get product purchased by wholesaler
 exports.getPurchasedProducts = (req, res, next) => {
-  const wholesalerId = "6512f9fbac8aea390a33b783";
+  const wholesalerId = req.params.userId;
   User.findById(wholesalerId)
     .then((user) => {
       Product.find({
@@ -85,10 +87,10 @@ exports.getPurchasedProducts = (req, res, next) => {
         "wholesaler.purchased": true,
       })
         .then((products) => {
+          // console.log(products);
           for (let farmer of products) {
             User.find({ _id: farmer.farmer.User })
               .then((farmers) => {
-                console.log(farmers);
                 res.render("wholesaler/purchased-products", {
                   path: "/wholesaler/purchased-products",
                   role: "wholesaler",
@@ -99,7 +101,7 @@ exports.getPurchasedProducts = (req, res, next) => {
                 });
               })
               .catch((err) => {
-                console.log(err);
+                err;
               });
           }
         })
@@ -146,9 +148,4 @@ exports.getSoldProducts = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-  // res.render("wholesaler/sold-products", {
-  //   path: "/wholesale/sold-products",
-  //   role: "wholesaler",
-  //   title: "Sold Products",
-  // });
 };
