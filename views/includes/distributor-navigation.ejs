@@ -1,0 +1,36 @@
+<header class="nav-container">
+  <h1 class="heading">Dashboard</h1>
+  <nav class="nav">
+    <ul>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/distributor/all-products' ? 'active' : '' %>"
+          href="/distributor/all-products/<%= user._id%>"
+          >All Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/distributor/purchased-products' ? 'active' : '' %>"
+          href="/distributor/purchased-products/<%= user._id%>"
+          >Puchased Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/distributor/sold-products' ? 'active' : '' %>"
+          href="/distributor/sold-products/<%= user._id%>"
+          >Sold Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/distributor/available-products' ? 'active' : '' %>"
+          href="/distributor/available-products/<%= user._id%>"
+          >Available Products</a
+        >
+      </li>
+    </ul>
+  </nav>
+  <button class="logout-btn" type="submit">Logout</button>
+</header>
