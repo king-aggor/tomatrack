@@ -63,18 +63,39 @@ exports.postBuyProduct = (req, res, next) => {
   const userId = req.body.userId;
   // console.log(prodId);
   // console.log(userId);
-  Product.updateOne(
-    { batchNum: prodId },
-    {
-      $set: {
-        "wholesaler.User": userId,
-        "wholesaler.purchased": true,
-      },
-    }
-  ).then((product) => {
-    console.log(product);
-    res.redirect(`available-products/${userId}`);
-  });
+  User.findById(userId)
+    .then((wholesaler) => {
+      console.log(wholesaler.orgName);
+      Product.updateOne(
+        { batchNum: prodId },
+        {
+          $set: {
+            "wholesaler.User": userId,
+            "wholesaler.purchased": true,
+            "wholesaler.wholesaler_name": wholesaler.orgName,
+          },
+        }
+      ).then((product) => {
+        console.log(product);
+        res.redirect(`available-products/${userId}`);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  // Product.updateOne(
+  //   { batchNum: prodId },
+  //   {
+  //     $set: {
+  //       "wholesaler.User": userId,
+  //       "wholesaler.purchased": true,
+  //       // "wholesaler_name":
+  //     },
+  //   }
+  // ).then((product) => {
+  //   console.log(product);
+  //   res.redirect(`available-products/${userId}`);
+  // });
 };
 
 //  get product purchased by wholesaler
