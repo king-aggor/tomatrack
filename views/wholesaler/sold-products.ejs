@@ -18,16 +18,14 @@
                     <th class="product-heading">Sold To</th>
                   </tr>
                   <% for(let product of prods){%>
-                    <% for(let distributor of distributors){%>
                   <tr class="products-info-container">
                     <td class="products-info"><%= product.batchNum%></td>
                     <td class="products-info"><%= product.harvestDate.toDateString()%></td>
                     <td class="products-info"><%= product.variety%></td>
                     <td class="products-info"><%= product.weight%></td>
                     <td class="products-info">GHc<%=product.price%></td>
-                    <td class="products-info"><%= distributor.orgName%></td>
+                    <td class="products-info"><%= product.distributor.distributor_name%></td>
                   </tr>
-                  <% }%>
                   <% }%>
                 </table>
                 <%}else{%> 

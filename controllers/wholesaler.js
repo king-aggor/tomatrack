@@ -119,22 +119,14 @@ exports.getSoldProducts = (req, res, next) => {
         "distributor.purchased": true,
       })
         .then((products) => {
-          for (let distributor of products) {
-            User.find({ _id: distributor.distributor.User })
-              .then((distributors) => {
-                res.render("wholesaler/sold-products", {
-                  path: "/wholesale/sold-products",
-                  role: "wholesaler",
-                  title: "Sold Products",
-                  prods: products,
-                  user: user,
-                  distributors: distributors,
-                });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
+          res.render("wholesaler/sold-products", {
+            path: "/wholesale/sold-products",
+            role: "wholesaler",
+            title: "Sold Products",
+            prods: products,
+            user: user,
+            // distributors: distributors,
+          });
         })
         .catch((err) => {
           console.log(err);
