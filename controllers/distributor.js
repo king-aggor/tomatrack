@@ -108,3 +108,31 @@ exports.getPurchasedProduct = (req, res, next) => {
       console.log(err);
     });
 };
+
+// get sold products
+exports.getSoldProducts = (req, res, next) => {
+  const userId = req.params.userId;
+  User.findById(userId)
+    .then((user) => {
+      const distributorId = user._id;
+      Product.find({
+        "distributor.User": distributorId,
+        "retailer.purchased": true,
+      })
+        .then((products) => {
+          res.render("distributor/sold-products", {
+            path: "/distributor/sold-products",
+            role: "distributor",
+            title: "sold Products",
+            prods: products,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
