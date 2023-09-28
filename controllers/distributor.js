@@ -83,6 +83,7 @@ exports.postBuyProduct = (req, res, next) => {
 
 // get purchased products
 exports.getPurchasedProduct = (req, res, next) => {
+  const userId = req.params.userId;
   User.findById(userId)
     .then((user) => {
       const userId = user._id;
@@ -91,23 +92,13 @@ exports.getPurchasedProduct = (req, res, next) => {
         "distributor.purchased": true,
       })
         .then((products) => {
-          for (let wholesaler of products) {
-            User.find({ _id: wholesaler.wholesaler.User })
-              .then((wholesalers) => {
-                // console.log(wholesalers);
-                res.render("distributor/purchased-products", {
-                  path: "/distributor/purchased-products",
-                  role: "distributor",
-                  title: "Purchased Products",
-                  prods: products,
-                  user: user,
-                  wholesalers: wholesalers,
-                });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
+          res.render("distributor/purchased-products", {
+            path: "/distributor/purchased-products",
+            role: "distributor",
+            title: "Purchased Products",
+            prods: products,
+            user: user,
+          });
         })
         .catch((err) => {
           console.log(err);
