@@ -25,5 +25,8 @@ router.get(
   distributorController.getPurchasedProduct
 );
 
+// get path to sold products
+router.get("/sold-products/:userId", distributorController.getSoldProducts);
+
 // export router
 module.exports = router;
