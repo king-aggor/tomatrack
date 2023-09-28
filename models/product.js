@@ -33,12 +33,14 @@ const productSchema = new Schema({
       required: true,
     },
     farmer_id: Schema.Types.ObjectId,
+    farmer_name: Schema.Types.String,
   },
   wholesaler: {
     User: {
       type: Schema.Types.ObjectId,
     },
     wholesaler_id: Schema.Types.ObjectId,
+    wholesaler_name: Schema.Types.String,
     purchased: Boolean,
   },
   distributor: {
@@ -46,6 +48,7 @@ const productSchema = new Schema({
       type: Schema.Types.ObjectId,
     },
     disrtributor_id: Schema.Types.ObjectId,
+    distributor_name: Schema.Types.String,
     purchased: Boolean,
   },
   retailer: {
@@ -53,6 +56,7 @@ const productSchema = new Schema({
       type: Schema.Types.ObjectId,
     },
     retailer_id: Schema.Types.ObjectId,
+    retailer_name: Schema.Types.String,
     purchased: Boolean,
   },
 });
