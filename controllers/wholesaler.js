@@ -61,11 +61,8 @@ exports.getAllProducts = (req, res, next) => {
 exports.postBuyProduct = (req, res, next) => {
   const prodId = req.body.batchNum;
   const userId = req.body.userId;
-  // console.log(prodId);
-  // console.log(userId);
   User.findById(userId)
     .then((wholesaler) => {
-      console.log(wholesaler.orgName);
       Product.updateOne(
         { batchNum: prodId },
         {
@@ -83,19 +80,6 @@ exports.postBuyProduct = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-  // Product.updateOne(
-  //   { batchNum: prodId },
-  //   {
-  //     $set: {
-  //       "wholesaler.User": userId,
-  //       "wholesaler.purchased": true,
-  //       // "wholesaler_name":
-  //     },
-  //   }
-  // ).then((product) => {
-  //   console.log(product);
-  //   res.redirect(`available-products/${userId}`);
-  // });
 };
 
 //  get product purchased by wholesaler
@@ -108,23 +92,13 @@ exports.getPurchasedProducts = (req, res, next) => {
         "wholesaler.purchased": true,
       })
         .then((products) => {
-          // console.log(products);
-          for (let farmer of products) {
-            User.find({ _id: farmer.farmer.User })
-              .then((farmers) => {
-                res.render("wholesaler/purchased-products", {
-                  path: "/wholesaler/purchased-products",
-                  role: "wholesaler",
-                  title: "Purchased Products",
-                  prods: products,
-                  user: user,
-                  farmers: farmers,
-                });
-              })
-              .catch((err) => {
-                err;
-              });
-          }
+          res.render("wholesaler/purchased-products", {
+            path: "/wholesaler/purchased-products",
+            role: "wholesaler",
+            title: "Purchased Products",
+            prods: products,
+            user: user,
+          });
         })
         .catch((err) => {
           console.log(err);

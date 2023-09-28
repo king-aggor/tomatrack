@@ -18,16 +18,14 @@
                     <th class="product-heading">Purchased From</th>
                   </tr>
                   <% for(let product of prods){%> 
-                    <% for(let farmer of farmers){%>
                   <tr class="products-info-container">
                     <td class="products-info"><%= product.batchNum %></td>
                     <td class="products-info"><%= product.harvestDate.toDateString() %></td>
                     <td class="products-info"><%= product.variety %></td>
                     <td class="products-info"><%= product.weight %></td>
                     <td class="products-info">GHc<%= product.price %></td>
-                    <td class="products-info"><%= farmer.orgName %></td>
+                    <td class="products-info"><%= product.farmer.farmer_name %></td>
                   </tr>
-                  <% }%>
                   <% }%>
                 </table>
                 <%}else{%> 
