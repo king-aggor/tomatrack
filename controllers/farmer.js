@@ -88,22 +88,31 @@ exports.getFarmerSoldProducts = (req, res, next) => {
         "wholesaler.User": { $exists: true },
       })
         .then((products) => {
-          for (let wholesaler of products) {
-            User.find({ _id: wholesaler.wholesaler.User })
-              .then((wholesalers) => {
-                res.render("farmer/sold-products", {
-                  path: "/farmer/sold-products",
-                  role: "farmer",
-                  title: "Sold Products",
-                  prods: products,
-                  user: user,
-                  wholesalers: wholesalers,
-                });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
+          console.log(products);
+          res.render("farmer/sold-products", {
+            path: "/farmer/sold-products",
+            role: "farmer",
+            title: "Sold Products",
+            prods: products,
+            user: user,
+            // wholesalers: wholesalers,
+          });
+          // for (let wholesaler of products) {
+          // User.find({ _id: wholesaler.wholesaler.User })
+          //   .then((wholesalers) => {
+          // res.render("farmer/sold-products", {
+          //   path: "/farmer/sold-products",
+          //   role: "farmer",
+          //   title: "Sold Products",
+          //   prods: products,
+          //   user: user,
+          //   wholesalers: wholesalers,
+          // });
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
+          // }
         })
         .catch((err) => {
           console.log(err);
