@@ -4,6 +4,7 @@ const path = require("path");
 // local modules
 const farmerRoutes = require("./routes/farmer"); //importing farmer route
 const wholesalerRoutes = require("./routes/wholesaler"); //importing wholesaler route
+const distributorRoutes = require("./routes/distributor"); //importing distributor routes
 const retailerRoutes = require("./routes/retailer"); //importing retailer routes
 const staticPagesRoutes = require("./routes/staticpages"); //importing staticPages routes
 const registerAndLoginRoutes = require("./routes/registerAndLogin"); //importing register&loging routes
@@ -54,6 +55,9 @@ app.use("/farmer", farmerRoutes);
 
 // middleware to use wholesalerRoutes
 app.use("/wholesaler", wholesalerRoutes);
+
+// middleware to use distributorRoutes
+app.use("/distributor", distributorRoutes);
 
 // middleware to use retailerRoutes
 app.use("/retailer", retailerRoutes);
