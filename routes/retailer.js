@@ -10,10 +10,13 @@ const express = require("express"); //importing express
 const router = express.Router();
 
 // path to retailer all products
-router.get("/all-products", retailerController.getAllProducts);
+router.get("/all-products/:userId", retailerController.getAllProducts);
+
+// path to retailer available products
+router.get("/available-products", retailerController.getAvailableProducts);
 
 // path to retailer QRcode generator
-router.get("/QRcode-generator", retailerController.getQRcodeGenerator);
+router.get("/QRcode-generator/:userId", retailerController.getQRcodeGenerator);
 
 // export router
 module.exports = router;
