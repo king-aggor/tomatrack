@@ -39,3 +39,16 @@ exports.postRegistration = (req, res, next) => {
 exports.getLogin = (req, res, nex) => {
   res.render("registerAndLogin/login");
 };
+
+exports.postLogin = (req, res, next) => {
+  //find a user whose email & password matches user login input
+  User.findOne({ email: req.body.email, password: req.body.password })
+    .then((user) => {
+      const userId = user._id;
+      const role = user.roles;
+      res.redirect(`${role}/all-products/${userId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
