@@ -19,16 +19,9 @@ exports.postRegistration = (req, res, next) => {
   })
     .then((user) => {
       console.log(user);
-      const role = user.roles;
-      if (role == "Farmer") {
-        res.redirect("farmer/all-products");
-      } else if (role == "Wholesaler") {
-        res.redirect("wholesaler/all-products");
-      } else if (role == "Distributor") {
-        res.redirect("distributor/all-products");
-      } else {
-        res.redirect("wholesaler/all-products");
-      }
+      const userId = user._id.toString();
+      const role = user.roles.User.toLowerCase();
+      res.redirect(`${role}/all-products/${userId}`);
     })
     .catch((err) => {
       console.log(err);
@@ -45,7 +38,6 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: req.body.email, password: req.body.password })
     .then((user) => {
       const userId = user._id.toString();
-      console.log(userId);
       const role = user.roles.User.toLowerCase();
       res.redirect(`${role}/all-products/${userId}`);
     })
