@@ -1,6 +1,7 @@
 // local  modules
 const User = require("../models/user"); //importing User model
 const Product = require("../models/product"); //importing Product model
+
 // get all retailer products
 exports.getAllProducts = (req, res, next) => {
   const userId = req.params.userId;
@@ -27,6 +28,7 @@ exports.getAllProducts = (req, res, next) => {
     });
 };
 
+// available products for sale
 exports.getAvailableProducts = (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId)
@@ -54,7 +56,35 @@ exports.getAvailableProducts = (req, res, next) => {
     });
 };
 
-// get retailer purchased products
+// post buy product
+exports.postBuyProduct = (req, res, next) => {
+  const prodId = req.body.prodId;
+  const userId = req.body.userId;
+  User.findById(userId)
+    .then((retailer) => {
+      Product.updateOne(
+        { _id: prodId },
+        {
+          $set: {
+            "retailer.User": userId,
+            "retailer.purchased": true,
+            "retailer.retailer_name": retailer.orgName,
+          },
+        }
+      )
+        .then((product) => {
+          res.redirect(`available-products/${userId}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// get QRcodeGenerator page
 exports.getQRcodeGenerator = (req, res, next) => {
   res.render("retailer/QRcode-generator", {
     path: "/retailer/QRcode-generator",

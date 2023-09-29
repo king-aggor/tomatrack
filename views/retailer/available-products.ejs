@@ -25,7 +25,7 @@
                     <td class="products-info">GHc<%= product.price %></td>
                     <td class="products-info">
                       <form action="/retailer/buy-product" method="post">
-                        <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
+                        <input type="hidden" value="<%= product._id %>" name="prodId">
                         <input type="hidden" value="<%=user._id%>" name="userId">
                         <button class="buy-btn" type="submit">Buy</button>
                       </form>
