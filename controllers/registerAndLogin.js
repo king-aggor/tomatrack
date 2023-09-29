@@ -45,7 +45,7 @@ exports.postLogin = (req, res, next) => {
   User.findOne({ email: req.body.email, password: req.body.password })
     .then((user) => {
       const userId = user._id;
-      const role = user.roles;
+      const role = user.roles.User;
       res.redirect(`${role}/all-products/${userId}`);
     })
     .catch((err) => {
