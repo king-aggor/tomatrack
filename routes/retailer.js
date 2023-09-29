@@ -13,7 +13,10 @@ const router = express.Router();
 router.get("/all-products/:userId", retailerController.getAllProducts);
 
 // path to retailer available products
-router.get("/available-products", retailerController.getAvailableProducts);
+router.get(
+  "/available-products/:userId",
+  retailerController.getAvailableProducts
+);
 
 // path to retailer QRcode generator
 router.get("/QRcode-generator/:userId", retailerController.getQRcodeGenerator);
