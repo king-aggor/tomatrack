@@ -12,13 +12,13 @@
       <li class="nav-item">
         <a
           class="<%= path === '/retailer/purchased-products' ? 'active' : '' %>"
-          href="/retailer/purchased-products/<%= user_id%>"
+          href="/retailer/purchased-products/<%=user._id%>"
           >Puchased Products</a
         >
       </li>
       <li class="nav-item">
         <a
-          class="<%= path === '/retailer/purchased-products' ? 'active' : '' %>"
+          class="<%= path === '/retailer/available-products' ? 'active' : '' %>"
           href="/retailer/available-products/<%=user._id%>"
           >Available Products</a
         >
