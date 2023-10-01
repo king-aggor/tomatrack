@@ -10,9 +10,12 @@ function closeAddProduct() {
 
 // display QRcode on QRcode-generator page when page loads
 function displayQRcode() {
+  // extract batch number and save to batchNum
+  const batchNum = document.getElementById("QRcode-title").innerHTML.split(" ");
+  const ip = "192.168.0.107";
   var qrc = new QRCode(
     document.getElementById("qrcode"),
-    "http://product/111223"
+    `http://${ip}:3030/product/${batchNum[2]}`
   );
 }
 
