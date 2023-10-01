@@ -111,9 +111,27 @@ exports.getPurchasedProducts = (req, res, next) => {
 
 // get QRcodeGenerator page
 exports.getQRcodeGenerator = (req, res, next) => {
-  res.render("retailer/QRcode-generator", {
-    path: "/retailer/QRcode-generator",
-    role: "retailer",
-    title: "QRcode Generator",
-  });
+  const prodId = req.params.prodId;
+  Product.findById(prodId)
+    .then((product) => {
+      // extract retailer id from product
+      const retailerId = product.retailer.User;
+      // find retailer
+      User.findById(retailerId)
+        .then((user) => {
+          res.render("retailer/QRcode-generator", {
+            path: "/retailer/QRcode-generator",
+            role: "retailer",
+            title: "QRcode Generator",
+            prod: product,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

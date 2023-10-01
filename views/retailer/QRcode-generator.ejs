@@ -5,16 +5,16 @@
 </head>
 <body onload="displayQRcode()" >
     <main class="dashboard">
-        <%-include("../includes/retailer-navigation.ejs") %>
+        <%-include("../includes/retailer-navigation.ejs", {user: user}) %>
         <section class="main">
-            <%-include("../includes/role.ejs") %>
+            <%-include("../includes/role.ejs", {stakeholder: user}) %>
             <div class="QRcode-container">
                 <div class="center">
                     <div id="qrcode">
                         <h1>Scan Here</h1>
                     </div>
                     <div class="QRcode-title-container">
-                        <h1 class="QRcode-title">BA5555</h1>
+                        <h1 class="QRcode-title"><%= prod.batchNum %></h1>
                     </div>
                     <button class="print-QRcode-btn">Click To Print QR Code</button>
                 </div>
