@@ -28,7 +28,7 @@ exports.getAllProducts = (req, res, next) => {
     });
 };
 
-// available products for sale
+// get available products for sale
 exports.getAvailableProducts = (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId)
@@ -74,6 +74,31 @@ exports.postBuyProduct = (req, res, next) => {
       )
         .then((product) => {
           res.redirect(`available-products/${userId}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// get purchased products
+exports.getPurchasedProducts = (req, res, next) => {
+  const retailerId = req.params.userId;
+  User.findById(retailerId)
+    .then((user) => {
+      // console.log(user);
+      Product.find({ "retailer.User": retailerId, "retailer.purchased": true })
+        .then((products) => {
+          res.render("retailer/purchased-products", {
+            path: "/retailer/purchased-products",
+            role: "retailer",
+            title: "Purchaseed Products",
+            prods: products,
+            user: user,
+          });
         })
         .catch((err) => {
           console.log(err);

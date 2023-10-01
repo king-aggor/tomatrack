@@ -21,8 +21,14 @@ router.get(
 // path to post buy product
 router.post("/buy-product", retailerController.postBuyProduct);
 
+// path to get purchased products
+router.get(
+  "/purchased-products/:userId",
+  retailerController.getPurchasedProducts
+);
+
 // path to retailer QRcode generator
-router.get("/QRcode-generator/:userId", retailerController.getQRcodeGenerator);
+router.get("/QRcode-generator/:prodId", retailerController.getQRcodeGenerator);
 
 // export router
 module.exports = router;
