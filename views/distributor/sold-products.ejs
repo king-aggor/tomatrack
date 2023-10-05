@@ -8,6 +8,7 @@
             <div class="products-container">
                 <h2 class="products-title">Sold Products</h2>
                 <table class="products-table">
+                  <% if(prods.length > 0){%> 
                   <tr class="products-heading-container">
                     <th class="product-heading">Batch No.</th>
                     <th class="product-heading">Harvest Date</th>
@@ -16,31 +17,20 @@
                     <th class="product-heading">Price/kg</th>
                     <th class="product-heading">Sold To</th>
                   </tr>
+                  <% for(let product of prods){%>
                   <tr class="products-info-container">
-                    <td class="products-info">BA5555</td>
-                    <td class="products-info">09-06-2023</td>
-                    <td class="products-info">Power Rano</td>
-                    <td class="products-info">1000</td>
-                    <td class="products-info">GHc300</td>
-                    <td class="products-info">Elite Distributors</td>
+                    <td class="products-info"><%= product.batchNum %></td>
+                    <td class="products-info"><%= product.harvestDate.toDateString() %></td>
+                    <td class="products-info"><%= product.variety %></td>
+                    <td class="products-info"><%= product.weight %></td>
+                    <td class="products-info">GHc<%= product.price %></td>
+                    <td class="products-info"><%= product.retailer.retailer_name %></td>
                   </tr>
-                  <tr class="products-info-container">
-                    <td class="products-info">BA5555</td>
-                    <td class="products-info">09-06-2023</td>
-                    <td class="products-info">Power Rano</td>
-                    <td class="products-info">1000</td>
-                    <td class="products-info">GHc300</td>
-                    <td class="products-info">Elite Distributors</td>
-                  </tr>
-                  <tr class="products-info-container">
-                    <td class="products-info">BA5555</td>
-                    <td class="products-info">09-06-2023</td>
-                    <td class="products-info">Power Rano</td>
-                    <td class="products-info">1000</td>
-                    <td class="products-info">GHc300</td>
-                    <td class="products-info">Elite Distributors</td>
-                  </tr>
+                  <% }%>
                 </table>
+                <%}else{%> 
+                  <h1>No Products Available For Sale</h1>
+                <%}%>
               </div>
         </section>
     </main>
