@@ -20,30 +20,13 @@ function displayQRcode() {
 }
 
 // print QRcode
-// function printQRcode() {
-//   const { jsPDF } = window.jspdf;
-//   let doc = new jsPDF({
-//   });
-// }
-// document.getElementById("print-btn").onclick(printQRcode());
+function printQRcode(elementId) {
+  let printContent = document.getElementById(elementId).innerHTML;
+  let originalContent = document.body.innerHTML;
 
-function printQRcode() {
-  const { jsPDF } = window.jspdf;
-  var pdf = new jsPDF({
-    orientation: "landscape",
-    unit: "mm",
-    format: [84, 40],
-  });
+  document.body.innerHTML = printContent;
 
-  pdf.setFontSize(15);
-  pdf.text("CraveCookie", 43, 20);
+  window.print();
 
-  pdf.setFontSize(10);
-  pdf.text("Scan For Menu", 43, 25);
-
-  let base64Image = document.getElementById("qrcode");
-  console.log(base64Image);
-
-  // pdf.addImage(base64Image, "png", 0, 0, 40, 40);
-  pdf.save(base64Image, "generated.pdf");
+  document.body.innerHTML = originalContent;
 }

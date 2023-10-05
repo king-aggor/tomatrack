@@ -9,16 +9,15 @@
         <section class="main">
             <%-include("../includes/role.ejs", {stakeholder: user}) %>
             <div class="QRcode-container">
-                <div class="center">
+                <div id="center" class="center">
                     <div id="qrcode">
                         <h1>Scan Here</h1>
                     </div>
                     <div class="QRcode-title-container">
                         <h1 class="QRcode-title" id="QRcode-title">Batch No.: <%= prod.batchNum %></h1>
                     </div>
-                    <button class="print-QRcode-btn">Click To Print QR Code</button>
                 </div>
-                
+                <button class="print-QRcode-btn" onclick="printQRcode('center')">Click To Print QR Code</button>
             </div>
         </section>
     </main>
