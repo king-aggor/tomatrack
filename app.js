@@ -8,6 +8,7 @@ const distributorRoutes = require("./routes/distributor"); //importing distribut
 const retailerRoutes = require("./routes/retailer"); //importing retailer routes
 const staticPagesRoutes = require("./routes/staticpages"); //importing staticPages routes
 const registerAndLoginRoutes = require("./routes/registerAndLogin"); //importing register&loging routes
+const productRoutes = require("./routes/product"); //importing product routes
 const User = require("./models/user"); //importing User model
 
 // third-party modules
@@ -61,6 +62,9 @@ app.use("/distributor", distributorRoutes);
 
 // middleware to use retailerRoutes
 app.use("/retailer", retailerRoutes);
+
+// middleware to use productRoutes
+app.use(productRoutes);
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
