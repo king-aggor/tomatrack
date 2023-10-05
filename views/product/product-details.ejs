@@ -1,26 +1,26 @@
 <%-include("../includes/head.ejs") %>
-    <link rel="stylesheet" href="css/register.css" />
-    <link rel="stylesheet" href="css/product.css" />
+    <link rel="stylesheet" href="/css/register.css" />
+    <link rel="stylesheet" href="/css/product.css" />
   </head>
   <body>
     <div class="registration-container">
       <div class="left-column">
         <div class="left-column-image-container">
-          <img src="images/blockchain.png" alt="blockchain" />
+          <img src="/images/blockchain.png" alt="blockchain" />
         </div>
       </div>
       <div class="right-column">
         <div class="image-outer-container">
           <div class="right-column-image-container">
-            <img src="images/blockchain-logo.jpg" alt="" />
+            <img src="/images/blockchain-logo.jpg" alt="" />
           </div>
         </div>
         <div class="product-container">
           <section class="stakeholder-section">
             <div class="stakeholder-logo-container">
-              <img src="images/farmer-icon.png" alt="farmer-logo" srcset="" />
+              <img src="/images/farmer-icon.png" alt="farmer-logo" srcset="" />
             </div>
-            <h1 class="stakeholder-name">Farmer A</h1>
+            <h1 class="stakeholder-name"> <%= product.farmer.farmer_name %> </h1>
             <p class="location">Accra,Ghana</p>
           </section>
           <div class="green-line">
@@ -29,12 +29,12 @@
           <section class="stakeholder-section">
             <div class="stakeholder-logo-container">
               <img
-                src="images/wholesaler-icon.png"
+                src="/images/wholesaler-icon.png"
                 alt="wholesaler-logo"
                 srcset=""
               />
             </div>
-            <h1 class="stakeholder-name">wholesaler B</h1>
+            <h1 class="stakeholder-name"> <%= product.wholesaler.wholesaler_name %> </h1>
             <p class="location">Accra,Ghana</p>
           </section>
           <div class="green-line">
@@ -43,12 +43,12 @@
           <section class="stakeholder-section">
             <div class="stakeholder-logo-container">
               <img
-                src="images/distributor-icon.png"
+                src="/images/distributor-icon.png"
                 alt="wholesaler-logo"
                 srcset=""
               />
             </div>
-            <h1 class="stakeholder-name">Distributor C</h1>
+            <h1 class="stakeholder-name"> <%=product.distributor.distributor_name %> </h1>
             <p class="location">Accra,Ghana</p>
           </section>
           <div class="green-line">
@@ -57,12 +57,12 @@
           <section class="stakeholder-section">
             <div class="stakeholder-logo-container">
               <img
-                src="images/retailer-icon.png"
+                src="/images/retailer-icon.png"
                 alt="wholesaler-logo"
                 srcset=""
               />
             </div>
-            <h1 class="stakeholder-name">Retailer D</h1>
+            <h1 class="stakeholder-name"> <%= product.retailer.retailer_name %> </h1>
             <p class="location">Accra,Ghana</p>
           </section>
         </div>

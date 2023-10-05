@@ -1,5 +1,5 @@
 //local modules
-const registerAndLoginController = require("../controllers/registerAndLogin");
+const registerAndLoginController = require("../controllers/registerAndLogin"); //importing registerAndLogin controller
 
 //third-party modules
 const express = require("express");
