@@ -1,0 +1,36 @@
+/* styling product container */
+.product-container{
+    /* border: 1px solid blue; */
+    /* width: 100%; */
+    height: 70%;
+    display:flex;
+    flex-wrap: nowrap;
+}
+
+.stakeholder-section{
+    /* border:1px solid red; */
+    width: 20%;
+    height: 300px;
+    text-align: center;
+}
+.stakeholder-logo-container{
+    /* border:1px solid yellow; */
+    width:100%;
+    height: 150px;
+}
+.stakeholder-logo-container img{
+    width:100%;
+    height: 100%;
+}
+.stakeholder-name{
+    font-size: 20px;
+}
+
+.green-line{
+    /* border:1px solid green; */
+    width: 10%;
+    height: 20px;
+    margin-top: 10%;
+    background-color: rgb(145, 231, 145);
+    text-align: center;
+}
