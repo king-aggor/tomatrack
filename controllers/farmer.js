@@ -16,6 +16,14 @@ exports.postAddProduct = (req, res, next) => {
         weight: req.body.weight,
         price: req.body.price,
         harvestDate: req.body.harvestDate,
+        fertilizer: {
+          typeOfFertilizer: req.body.fertilizer,
+          npkRatio: {
+            n: req.body.n,
+            p: req.body.p,
+            k: req.body.k,
+          },
+        },
         farmer: { User: farmerId },
         "farmer.farmer_name": user.orgName,
         "wholesaler.purchased": false,

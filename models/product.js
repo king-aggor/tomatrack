@@ -27,6 +27,14 @@ const productSchema = new Schema({
     type: Date,
     required: true,
   },
+  fertilizer: {
+    typeOfFertilizer: { type: String, require: true },
+    npkRatio: {
+      n: { type: Number },
+      p: { type: Number },
+      k: { type: Number },
+    },
+  },
   farmer: {
     User: {
       type: Schema.Types.ObjectId,
