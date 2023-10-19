@@ -1,4 +1,7 @@
 <%-include("../includes/head.ejs") %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script src="/js/main.js"></script>
 <link rel="stylesheet" href="/css/add-product.css">
   </head>
@@ -18,35 +21,52 @@
                 <label for="batchNum">
                   Batch No.
                   <br>
-                  <input type="number" name="batchNum" id="batchNum">
+                  <input type="number" name="batchNum" id="batchNum" required>
                 </label>
               </div>
               <div class="input-lable-container">
                 <label for="variety">
                   Variety
                   <br>
-                  <input type="text" name="variety" id="variety">
+                  <input type="text" name="variety" id="variety" required>
                 </label>
               </div>
               <div class="input-lable-container">
                 <label for="weight">
                   Weight (kg)
                   <br>
-                  <input type="number" name="weight" id="weight">
+                  <input type="number" name="weight" id="weight" required>
                 </label>
               </div>
               <div class="input-lable-container">
                 <label for="price">
                   Price / kg
                   <br>
-                  <input type="number" name="price" id="price">
+                  <input type="number" name="price" id="price" required>
                 </label>
               </div>
               <div class="input-lable-container">
-                <label for="Harvest-date">
+                <label for="harvestDate">
                   Harvest Date
                   <br>
-                  <input type="date" name="harvestDate" id="harvestDate">
+                  <input type="date" name="harvestDate" id="harvestDate" required>
+                </label>
+              </div>
+              <div class="input-lable-container">
+                <label for="fertilizer">
+                  Type Of Fertilizer Used
+                  <br>
+                  <select name="fertilizer" id="fertilizer">
+                    <option value="">Select Type Of Fertilizer</option>
+                    <option value="Organic Fertilizer">Organic Fertilizer</option>
+                    <option value="Chemical Fertilizer">Chemical Fertilizer</option>
+                  </select>
+                </label><br>
+                <label id="npkRatio" for="NPK">NPK Ratio:
+                  <br>
+                  <input class="npk" type="number" name="n" id="n" placeholder="N">
+                  <input class="npk" type="number" name="p" id="p" placeholder="P">
+                  <input class="npk" type="number" name="k" id="k" placeholder="K">
                 </label>
               </div>
               <button class="add-product-btn" type="submit">Add Product</button>
@@ -83,5 +103,15 @@
           <% }%>
       </section>
     </main>
+    <script>
+      $('#fertilizer').change(function(){
+        if($('#fertilizer').val() === "Chemical Fertilizer"){
+          $('#npkRatio').show()
+        }
+        else{
+          $('#npkRatio').hide()
+        }
+      })
+    </script>
   </body>
 <%-include("../includes/end.ejs")%>
