@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/register.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/css/register.css" />
     <title>Registration Page</title>
   </head>
   <body>
@@ -23,7 +27,7 @@
           <section class="form-heading">
             <h1 class="form-heading-text">Register</h1>
           </section>
-          <form action="" method="post">
+          <form name="register" action="" method="post" onsubmit="validate()">
             <div class="role">
               <label for="role">Role<span>*</span></label>
               <select name="role" id="role">
@@ -71,27 +75,29 @@
                 <option value="" disabled selected hidden>
                   select a region in Ghana
                 </option>
-                <option value="Greater Accra">Greater Accra</option>
-                <option value="Ashanti">Ashanti</option>
-                <option value="Bono">Bono</option>
-                <option value="Bono East">Bono East</option>
-                <option value="Central">Central</option>
-                <option value="Ahafo">Ahafo</option>
-                <option value="Eastern">Eastern</option>
-                <option value="Northen">Northen</option>
-                <option value="Savannah">Savannah</option>
-                <option value="North East">North East</option>
-                <option value="Upper East">Upper East</option>
-                <option value="Upper West">Upper West</option>
-                <option value="Volta">Volta</option>
-                <option value="Oti">Oti</option>
-                <option value="Western">Western</option>
-                <option value="Western North">Western North</option>
+                <option value="Greater Accra">Greater Accra Region</option>
+                <option value="Ashanti">Ashanti Region</option>
+                <option value="Bono">Bono Region</option>
+                <option value="Bono East">Bono East Region</option>
+                <option value="Central">Central Region</option>
+                <option value="Ahafo">Ahafo Region</option>
+                <option value="Eastern">Eastern Region</option>
+                <option value="Northen">Northen Region</option>
+                <option value="Savannah">Savannah Region</option>
+                <option value="North East">North East Region</option>
+                <option value="Upper East">Upper East Region</option>
+                <option value="Upper West">Upper West Region</option>
+                <option value="Volta">Volta Region</option>
+                <option value="Oti">Oti Region</option>
+                <option value="Western">Western Region</option>
+                <option value="Western North">Western North Region</option>
               </select>
             </div>
             <div class="password">
               <label for="password">Password<span>*</span></label>
               <input
+                minlength="4"
+                class="pword"
                 type="password"
                 name="password"
                 id="password"
@@ -104,19 +110,43 @@
                 >Confirm Password<span>*</span></label
               >
               <input
+                minlength="4"
+                class="cpword"
                 type="password"
                 name="confirm-password"
-                id="confirm-password"
+                id="confirmPassword"
                 placeholder="confirm password"
                 required
               />
             </div>
+            <span id="message"></span>
             <div class="submit-button">
-              <button type="submit">Submit</button>
+              <button class="regiter-submit" type="submit" id="submit">
+                Submit
+              </button>
             </div>
           </form>
           <a href="/login">already have an account? Login Here</a>
         </div>
+        <script>
+          $("form").validate();
+        </script>
+        <script>
+          $("#password, #confirmPassword").on("keyup", function () {
+            if (
+              $("#password").val() == "" &&
+              $("#confirmPassword").val() == ""
+            ) {
+              $("#message").html("enter password").css("color", "red");
+            } else if ($("#password").val() == $("#confirmPassword").val()) {
+              $("#message").html("passwords match").css("color", "green");
+              $("#submit").prop("disabled", false);
+            } else {
+              $("#submit").prop("disabled", true);
+              $("#message").html("passwords do not match ").css("color", "red");
+            }
+          });
+        </script>
       </div>
     </div>
   </body>

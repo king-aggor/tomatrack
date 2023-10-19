@@ -78,6 +78,9 @@ form input, form select{
 .password{
     width: 50%;
 }
+#message{
+    margin:0px 10px;
+}
 .submit-button button{
     border: none;
     background-color:rgb(30, 70, 120);
