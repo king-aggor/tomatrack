@@ -67,9 +67,18 @@ exports.postBuyProduct = (req, res, next) => {
         { batchNum: prodId },
         {
           $set: {
-            "distributor.User": userId,
-            "distributor.purchased": true,
-            "distributor.distributor_name": user.orgName,
+            // "distributor.User": userId,
+            // "distributor.purchased": true,
+            // "distributor.distributor_name": user.orgName,
+            distributor: {
+              User: userId,
+              purchased: true,
+              distributor_name: user.orgName,
+              location: {
+                country: user.country,
+                region: user.region,
+              },
+            },
           },
         }
       ).then((product) => {
