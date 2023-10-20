@@ -5,7 +5,7 @@ const User = require("../models/user"); //importing User model
 let userId;
 // post add product( To post farmer's new product)
 exports.postAddProduct = (req, res, next) => {
-  // const userId = req.params.userID;
+  // const userId = req.params.userId;
   User.findById(userId)
     .then((user) => {
       // console.log(user._id.toString());
@@ -24,8 +24,15 @@ exports.postAddProduct = (req, res, next) => {
             k: req.body.k,
           },
         },
-        farmer: { User: farmerId },
+        // farmer: { User: farmerId },
         "farmer.farmer_name": user.orgName,
+        farmer: {
+          User: farmerId,
+          location: {
+            country: user.country,
+            region: user.region,
+          },
+        },
         "wholesaler.purchased": false,
         "distributor.purchased": false,
         "retailer.purchased": false,
