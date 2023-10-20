@@ -62,14 +62,20 @@ exports.postBuyProduct = (req, res, next) => {
   const prodId = req.body.batchNum;
   const userId = req.body.userId;
   User.findById(userId)
-    .then((wholesaler) => {
+    .then((wholesalerInfo) => {
       Product.updateOne(
         { batchNum: prodId },
         {
           $set: {
-            "wholesaler.User": userId,
-            "wholesaler.purchased": true,
-            "wholesaler.wholesaler_name": wholesaler.orgName,
+            wholesaler: {
+              User: userId,
+              purchased: true,
+              wholesaler_name: wholesalerInfo.orgName,
+              location: {
+                country: wholesalerInfo.country,
+                region: wholesalerInfo.region,
+              },
+            },
           },
         }
       ).then((product) => {
@@ -111,7 +117,8 @@ exports.getPurchasedProducts = (req, res, next) => {
 
 // get products sold by wholesaler
 exports.getSoldProducts = (req, res, next) => {
-  User.findById("6512f9fbac8aea390a33b783")
+  const wholesalerId = req.params.userId;
+  User.findById(wholesalerId)
     .then((user) => {
       const wholesalerId = user._id;
       Product.find({
