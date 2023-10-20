@@ -3,9 +3,10 @@
 .product-container{
     /* border: 1px solid blue; */
     /* width: 100%; */
-    height: 70%;
+    height: 35%;
     display:flex;
     flex-wrap: nowrap;
+    /* margin-bottom: 30px; */
 }
 
 .stakeholder-section{
@@ -15,7 +16,8 @@
     text-align: center;
 }
 .stakeholder-logo-container{
-    /* border:1px solid yellow; */
+    border:3px solid rgb(30, 70, 120);
+    border-radius: 5px;
     width:100%;
     height: 150px;
 }
@@ -31,7 +33,29 @@
     /* border:1px solid green; */
     width: 10%;
     height: 20px;
-    margin-top: 10%;
+    margin-top: 70px;
     background-color: rgb(145, 231, 145);
     text-align: center;
+}
+
+.info-box{
+    width: 50%;
+    margin:auto;
+    padding: 20px;
+    border: 1px solid red;
+    /* text-align: center; */
+}
+.info-box h1{
+    text-align: center;
+    color:brown;
+}
+.info-box li{
+    /* margin: 5px 0 5px 20px; */
+    margin:5px 0;
+}
+li b{
+    color:rgba(255, 0, 0, 0.781);
+}
+.info-list{
+    margin-left: 20px;
 }

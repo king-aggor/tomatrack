@@ -15,13 +15,17 @@
             <img src="/images/blockchain-logo.jpg" alt="" />
           </div>
         </div>
+        <div class="product-details">
         <div class="product-container">
           <section class="stakeholder-section">
             <div class="stakeholder-logo-container">
               <img src="/images/farmer-icon.png" alt="farmer-logo" srcset="" />
             </div>
             <h1 class="stakeholder-name"> <%= product.farmer.farmer_name %> </h1>
-            <p class="location">Accra,Ghana</p>
+            <p class="location"><%=product.farmer.location.region%> Region, <%=product.farmer.location.country%></p>
+            <p><em>Type Of Fertilizer:</em> <%= product.fertilizer.typeOfFertilizer %></p>
+            <p><em>NPK Ratio:</em></p>
+            <p><em>N:</em><%=product.fertilizer.npkRatio.n%> <em>P:</em><%=product.fertilizer.npkRatio.p%> <em>K:</em><%=product.fertilizer.npkRatio.k%></p>
           </section>
           <div class="green-line">
             <i class="fa-regular fa-circle-check" style="color: #ffffff"></i>
@@ -35,7 +39,7 @@
               />
             </div>
             <h1 class="stakeholder-name"> <%= product.wholesaler.wholesaler_name %> </h1>
-            <p class="location">Accra,Ghana</p>
+            <p class="location"><%=product.wholesaler.location.region%> Region, <%=product.wholesaler.location.country%></p>
           </section>
           <div class="green-line">
             <i class="fa-regular fa-circle-check" style="color: #ffffff"></i>
@@ -49,7 +53,7 @@
               />
             </div>
             <h1 class="stakeholder-name"> <%=product.distributor.distributor_name %> </h1>
-            <p class="location">Accra,Ghana</p>
+            <p class="location"><%=product.distributor.location.region%> Region, <%=product.distributor.location.country%></p>
           </section>
           <div class="green-line">
             <i class="fa-regular fa-circle-check" style="color: #ffffff"></i>
@@ -63,8 +67,22 @@
               />
             </div>
             <h1 class="stakeholder-name"> <%= product.retailer.retailer_name %> </h1>
-            <p class="location">Accra,Ghana</p>
+            <p class="location"><%=product.retailer.location.region%> Region, <%=product.retailer.location.country%></p>
           </section>
+        </div>
+      </div>
+        <div class="info-box">
+          <h1 class="info-heading">General Information</h1>
+          <p class="info-text">
+            <ul class="info-list">
+              <li class="two">
+                Tomatoes cultivated with <b>Chemical Fertilizers</b> have <b>higher</b> sugar content and <b>lower</b> acid content as compared to tomatoes cultivated with <b>Organic Fertilizers</b>
+              </li>
+              <li class="one">
+                The accepted NPK ratio for tomato chemical fertilizer is <b>4-6-10</b> or <b>4-6-8</b>. Any other ratio can cause deficiency in the nutrients of the tomato fruits
+              </li>
+            </ul>
+          </p>
         </div>
       </div>
     </div>
