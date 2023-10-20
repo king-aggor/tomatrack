@@ -61,14 +61,23 @@ exports.postBuyProduct = (req, res, next) => {
   const prodId = req.body.prodId;
   const userId = req.body.userId;
   User.findById(userId)
-    .then((retailer) => {
+    .then((user) => {
       Product.updateOne(
         { _id: prodId },
         {
           $set: {
-            "retailer.User": userId,
-            "retailer.purchased": true,
-            "retailer.retailer_name": retailer.orgName,
+            // "retailer.User": userId,
+            // "retailer.purchased": true,
+            // "retailer.retailer_name": retailer.orgName,
+            retailer: {
+              User: userId,
+              purchased: true,
+              retailer_name: user.orgName,
+              location: {
+                country: user.country,
+                region: user.region,
+              },
+            },
           },
         }
       )
