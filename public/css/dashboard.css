@@ -45,10 +45,18 @@
 }
 
 .logout-btn{
-    border: none;
-    color:rgb(255, 255, 255);
-    background-color: rgb(30, 70, 120);
-    margin: 0px 0 0 30%
+    width: 50%;
+    height: 25px;
+    border: 2px solid;
+    border-radius: 7px;
+    color: rgb(30, 70, 120);
+    background-color: rgb(255, 255, 255);
+    margin-left: 20%;
+}
+.logout-btn a{
+    text-decoration: none;
+    color: rgb(30, 70, 120);
+    font-size: 16px;
 }
 
 /* styling main page */
