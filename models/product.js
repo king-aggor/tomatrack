@@ -42,7 +42,10 @@ const productSchema = new Schema({
     },
     farmer_id: Schema.Types.ObjectId,
     farmer_name: Schema.Types.String,
-    farmer_location: Schema.Types.String,
+    location: {
+      country: { type: String },
+      region: { type: String },
+    },
   },
   wholesaler: {
     User: {
@@ -50,7 +53,10 @@ const productSchema = new Schema({
     },
     wholesaler_id: Schema.Types.ObjectId,
     wholesaler_name: Schema.Types.String,
-    wholesaler_location: Schema.Types.String,
+    location: {
+      country: { type: String },
+      region: { type: String },
+    },
     purchased: Boolean,
   },
   distributor: {
@@ -59,7 +65,10 @@ const productSchema = new Schema({
     },
     disrtributor_id: Schema.Types.ObjectId,
     distributor_name: Schema.Types.String,
-    distributor_location: Schema.Types.String,
+    location: {
+      country: { type: String },
+      region: { type: String },
+    },
     purchased: Boolean,
   },
   retailer: {
@@ -68,7 +77,10 @@ const productSchema = new Schema({
     },
     retailer_id: Schema.Types.ObjectId,
     retailer_name: Schema.Types.String,
-    retailer_location: Schema.Types.String,
+    location: {
+      country: { type: String },
+      region: { type: String },
+    },
     purchased: Boolean,
   },
 });
