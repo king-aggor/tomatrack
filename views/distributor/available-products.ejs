@@ -14,6 +14,7 @@
                     <th class="product-heading">Harvest Date</th>
                     <th class="product-heading">Variety</th>
                     <th class="product-heading">Type Of Fertilizer</th>
+                    <th class="product-heading">NPK Ratio</th>
                     <th class="product-heading">Weight(kg)</th>
                     <th class="product-heading">Price/kg</th>
                   </tr>
@@ -23,6 +24,11 @@
                     <td class="products-info"><%= product.harvestDate.toDateString() %></td>
                     <td class="products-info"><%= product.variety %></td>
                     <td class="products-info"><%= product.fertilizer.typeOfFertilizer %></td>
+                    <% if(product.fertilizer.typeOfFertilizer == "Chemical Fertilizer"){%>
+                      <td class="products-info"><%= product.fertilizer.npkRatio.n %>-<%= product.fertilizer.npkRatio.p %>-<%= product.fertilizer.npkRatio.k %></td>
+                      <%}else{%>
+                        <td class="products-info">-</td>
+                      <%}%>
                     <td class="products-info"><%= product.weight %></td>
                     <td class="products-info">GHc <%= product.wholesaler.price %></td>
                     <td class="products-info">
