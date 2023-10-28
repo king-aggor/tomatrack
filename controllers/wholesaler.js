@@ -63,25 +63,33 @@ exports.postBuyProduct = (req, res, next) => {
   const userId = req.body.userId;
   User.findById(userId)
     .then((wholesalerInfo) => {
-      Product.updateOne(
-        { batchNum: prodId },
-        {
-          $set: {
-            wholesaler: {
-              User: userId,
-              purchased: true,
-              wholesaler_name: wholesalerInfo.orgName,
-              location: {
-                country: wholesalerInfo.country,
-                region: wholesalerInfo.region,
+      Product.findOne({ batchNum: prodId })
+        .then((prod) => {
+          // console.log((prod.price * 20) / 100 + prod.price);
+          Product.updateOne(
+            { batchNum: prodId },
+            {
+              $set: {
+                wholesaler: {
+                  User: userId,
+                  purchased: true,
+                  wholesaler_name: wholesalerInfo.orgName,
+                  location: {
+                    country: wholesalerInfo.country,
+                    region: wholesalerInfo.region,
+                  },
+                  price: ((prod.price * 20) / 100 + prod.price).toFixed(2),
+                },
               },
-            },
-          },
-        }
-      ).then((product) => {
-        console.log(product);
-        res.redirect(`available-products/${userId}`);
-      });
+            }
+          ).then((product) => {
+            console.log(product);
+            res.redirect(`available-products/${userId}`);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
