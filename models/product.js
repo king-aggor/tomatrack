@@ -57,6 +57,7 @@ const productSchema = new Schema({
       country: { type: String },
       region: { type: String },
     },
+    price: { type: Number },
     purchased: Boolean,
   },
   distributor: {
@@ -69,6 +70,7 @@ const productSchema = new Schema({
       country: { type: String },
       region: { type: String },
     },
+    price: { type: Number },
     purchased: Boolean,
   },
   retailer: {
