@@ -62,28 +62,55 @@ exports.postBuyProduct = (req, res, next) => {
 
   User.findById(userId)
     .then((user) => {
-      console.log(user.orgName);
-      Product.updateOne(
-        { batchNum: prodId },
-        {
-          $set: {
-            // "distributor.User": userId,
-            // "distributor.purchased": true,
-            // "distributor.distributor_name": user.orgName,
-            distributor: {
-              User: userId,
-              purchased: true,
-              distributor_name: user.orgName,
-              location: {
-                country: user.country,
-                region: user.region,
+      Product.findOne({ batchNum: prodId })
+        .then((prod) => {
+          // console.log(prod.wholesaler.price);
+          console.log(user.orgName);
+          Product.updateOne(
+            { batchNum: prodId },
+            {
+              $set: {
+                distributor: {
+                  User: userId,
+                  purchased: true,
+                  distributor_name: user.orgName,
+                  location: {
+                    country: user.country,
+                    region: user.region,
+                  },
+                  price: (
+                    (prod.wholesaler.price * 15) / 100 +
+                    prod.wholesaler.price
+                  ).toFixed(2),
+                },
               },
-            },
-          },
-        }
-      ).then((product) => {
-        res.redirect(`available-products/${userId}`);
-      });
+            }
+          ).then((product) => {
+            res.redirect(`available-products/${userId}`);
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // console.log(user.orgName);
+      // Product.updateOne(
+      //   { batchNum: prodId },
+      //   {
+      //     $set: {
+      //       distributor: {
+      //         User: userId,
+      //         purchased: true,
+      //         distributor_name: user.orgName,
+      //         location: {
+      //           country: user.country,
+      //           region: user.region,
+      //         },
+      //       },
+      //     },
+      //   }
+      // ).then((product) => {
+      //   res.redirect(`available-products/${userId}`);
+      // });
     })
     .catch((err) => {
       console.log(err);
