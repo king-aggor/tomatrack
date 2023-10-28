@@ -22,7 +22,7 @@
                     <td class="products-info"><%= product.harvestDate.toDateString() %></td>
                     <td class="products-info"><%= product.variety %></td>
                     <td class="products-info"><%= product.weight %></td>
-                    <td class="products-info"><%= product.price %></td>
+                    <td class="products-info"><%= product.distributor.price %></td>
                     <td class="products-info">
                       <button type="submit" class="buy-btn">
                         <a href="/retailer/QRcode-generator/<%= product._id %>">Generate QRcode</a>
@@ -31,7 +31,7 @@
                   </tr>
                   <% }%>
                   <%}else{%> 
-                    <h1>No Products Available For Sale</h1>
+                    <h1>No Products</h1>
                   <%}%>
                 </table>
               </div>
