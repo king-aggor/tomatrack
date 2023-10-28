@@ -22,7 +22,7 @@
                     <td class="products-info"><%= product.harvestDate.toDateString() %></td>
                     <td class="products-info"><%= product.variety %></td>
                     <td class="products-info"><%= product.weight %></td>
-                    <td class="products-info">GHc<%= product.price %></td>
+                    <td class="products-info">GHc<%= product.distributor.price %></td>
                     <td class="products-info">
                       <form action="/retailer/buy-product" method="post">
                         <input type="hidden" value="<%= product._id %>" name="prodId">
@@ -34,7 +34,7 @@
                   <% }%>
                 </table>
                 <%}else{%> 
-                  <h1>No Products Available For Sale</h1>
+                  <h1>No Products Available To Purchase</h1>
                 <%}%>
               </div>
         </section>
