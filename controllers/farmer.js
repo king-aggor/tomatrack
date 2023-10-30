@@ -1,6 +1,9 @@
 // local modules
+const { isObjectIdOrHexString } = require("mongoose");
 const Product = require("../models/product"); //importing Product model
 const User = require("../models/user"); //importing User model
+
+const crypto = require("crypto");
 
 let userId;
 // post add product( To post farmer's new product)
@@ -33,13 +36,24 @@ exports.postAddProduct = (req, res, next) => {
             region: user.region,
           },
         },
-        "wholesaler.purchased": false,
-        "distributor.purchased": false,
-        "retailer.purchased": false,
+        wholesaler: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
+        distributor: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
+        retailer: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
       })
         .then((product) => {
           console.log(product);
-          // console.log(userId);
           res.redirect(`all-products/${userId}`);
         })
         .catch((err) => {
@@ -100,7 +114,7 @@ exports.getFarmerSoldProducts = (req, res, next) => {
       const farmerId = user._id;
       Product.find({
         "farmer.User": farmerId,
-        "wholesaler.User": { $exists: true },
+        "wholesaler.orderConfirmed": true,
       })
         .then((products) => {
           console.log(products);
@@ -110,24 +124,7 @@ exports.getFarmerSoldProducts = (req, res, next) => {
             title: "Sold Products",
             prods: products,
             user: user,
-            // wholesalers: wholesalers,
           });
-          // for (let wholesaler of products) {
-          // User.find({ _id: wholesaler.wholesaler.User })
-          //   .then((wholesalers) => {
-          // res.render("farmer/sold-products", {
-          //   path: "/farmer/sold-products",
-          //   role: "farmer",
-          //   title: "Sold Products",
-          //   prods: products,
-          //   user: user,
-          //   wholesalers: wholesalers,
-          // });
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
-          // }
         })
         .catch((err) => {
           console.log(err);
@@ -146,7 +143,7 @@ exports.getFarmerAvailableProducts = (req, res, next) => {
       const farmer = user._id;
       Product.find({
         "farmer.User": farmer,
-        "wholesaler.User": { $exists: false },
+        "wholesaler.orderConfirmed": false,
       })
         .then((products) => {
           // console.log(products);
@@ -165,4 +162,74 @@ exports.getFarmerAvailableProducts = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+// get farmer's purchase requests (To display produtcs wholesalers have ordered from farmer)
+exports.getPurchaseRequests = (req, res, next) => {
+  userId = req.params.userId;
+  User.findById(userId)
+    .then((user) => {
+      Product.find({
+        "farmer.User": userId,
+        "wholesaler.ordered": true,
+        "wholesaler.orderConfirmed": false,
+      })
+        .then((products) => {
+          // console.log(products);
+          res.render("farmer/purchase-requests", {
+            path: "/farmer/purchase-requests",
+            role: "farmer",
+            title: "Available Products",
+            user: user,
+            prods: products,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// post confirm order(to confirm wholesalers' order)
+exports.postConfirmOrder = (req, res, next) => {
+  const prodId = req.body.batchNum;
+  console.log(prodId);
+
+  Product.updateOne(
+    { batchNum: prodId },
+    {
+      $set: {
+        "wholesaler.orderConfirmed": true,
+      },
+    }
+  )
+    .then((product) => {
+      console.log(product);
+      res.redirect(`/farmer/purchase-requests/${userId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// post decline order
+exports.postDeclineOrder = (req, res, next) => {
+  const batchNum = req.body.batchNum;
+  Product.updateOne(
+    { batchNum: batchNum },
+    {
+      $set: {
+        wholesaler: {
+          ordered: false,
+          orderConfirmed: false,
+        },
+      },
+    }
+  ).then((product) => {
+    console.log(product);
+    res.redirect(`/farmer/purchase-requests/${userId}`);
+  });
 };

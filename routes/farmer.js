@@ -13,6 +13,10 @@ const router = express.Router();
 // post path to add product
 router.post("/add-product", farmerController.postAddProduct);
 router.post("/delete-product", farmerController.postDeleteProduct);
+// post path to confirm order
+router.post("/confirm-order", farmerController.postConfirmOrder);
+//post path to decline order
+router.post("/decline-order", farmerController.postDeclineOrder);
 // get path to all farmer's products
 router.get("/all-products/:userId", farmerController.getFarmerAllProduts);
 // get path to farmer's sold products
@@ -22,6 +26,8 @@ router.get(
   "/available-products/:userId",
   farmerController.getFarmerAvailableProducts
 );
+//get path to farmer's purchase requests
+router.get("/purchase-requests/:userId", farmerController.getPurchaseRequests);
 
 // export router
 module.exports = router;
