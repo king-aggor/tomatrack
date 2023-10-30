@@ -2,7 +2,7 @@
 </head>
 <body>
     <main class="dashboard">
-        <%-include("../includes/farmer-navigation.ejs", {user: user}) %>
+        <%-include("../includes/wholesaler-navigation.ejs", {user: user}) %>
         <section class="main">
             <%-include("../includes/role.ejs",{stakeholder: user}) %>
             <div class="products-container">
@@ -19,21 +19,21 @@
                   </tr>
                   <% for(let product of prods){%>
                   <tr class="products-info-container">
-                    <td class="products-info"><%= product.batchNum %></td>
-                    <td class="products-info"><%= product.harvestDate.toDateString()%></td>
-                    <td class="products-info"><%= product.variety %></td>
-                    <td class="products-info"><%= product.weight %></td>
-                    <td class="products-info">GHc <%= product.price %></td>
-                    <td class="products-info"><%= product.wholesaler.wholesaler_name %></td>
+                    <td class="products-info">001</td>
+                    <td class="products-info">Tue 20 Oct 2023</td>
+                    <td class="products-info">Akumadan</td>
+                    <td class="products-info">100</td>
+                    <td class="products-info">GHc 50</td>
+                    <td class="products-info">Distributor One</td>
                     <td class="products-info">
-                      <form action="/farmer/confirm-order" method="post">
+                      <form action="/wholesaler/confirm-order" method="post">
                         <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
                         <input type="hidden" value="<%=user._id%>" name="userId">
                         <button class="confirm-btn" type="submit">Confirm Order</button>
                       </form>
                     </td>
                     <td class="products-info">
-                        <form action="/farmer/decline-order" method="post">
+                        <form action="/wholesaler/decline-order" method="post">
                           <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
                           <input type="hidden" value="<%=user._id%>" name="userId">
                           <button class="reject-btn" type="submit">Decline Order</button>

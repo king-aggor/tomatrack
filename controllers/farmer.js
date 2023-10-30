@@ -179,7 +179,7 @@ exports.getPurchaseRequests = (req, res, next) => {
           res.render("farmer/purchase-requests", {
             path: "/farmer/purchase-requests",
             role: "farmer",
-            title: "Available Products",
+            title: "Purchase Requests",
             user: user,
             prods: products,
           });
