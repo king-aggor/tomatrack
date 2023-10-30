@@ -157,6 +157,35 @@ exports.getPurchasedProducts = (req, res, next) => {
     });
 };
 
+// get purchase requests
+exports.getPurchaseRequests = (req, res, next) => {
+  const userId = req.params.userId;
+  // console.log(userId);
+  User.findById(userId)
+    .then((user) => {
+      Product.find({
+        "wholesaler.User": userId,
+        "distributor.ordered": true,
+        "distributor.orderConfirmed": false,
+      })
+        .then((products) => {
+          res.render("wholesaler/purchase-requests", {
+            path: "/wholesaler/purchase-requests",
+            role: "wholesaler",
+            title: "Purchase Requests",
+            prods: products,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // get products sold by wholesaler
 exports.getSoldProducts = (req, res, next) => {
   const wholesalerId = req.params.userId;
@@ -169,7 +198,7 @@ exports.getSoldProducts = (req, res, next) => {
       })
         .then((products) => {
           res.render("wholesaler/sold-products", {
-            path: "/wholesale/sold-products",
+            path: "/wholesaler/sold-products",
             role: "wholesaler",
             title: "Sold Products",
             prods: products,

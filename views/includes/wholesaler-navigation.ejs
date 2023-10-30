@@ -18,9 +18,16 @@
       </li>
       <li class="nav-item">
         <a
-          class="<%= path === '/wholesale/sold-products' ? 'active' : '' %>"
+          class="<%= path === '/wholesaler/sold-products' ? 'active' : '' %>"
           href="/wholesaler/sold-products/<%= user._id%>"
           >Sold Products</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="<%= path === '/wholesaler/purchase-requests' ? 'active' : '' %>"
+          href="/wholesaler/purchase-requests/<%= user._id%>"
+          >Purchase Request</a
         >
       </li>
       <li class="nav-item">

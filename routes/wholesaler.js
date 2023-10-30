@@ -30,6 +30,12 @@ router.get(
   wholesaleController.getPurchasedProducts
 );
 
+// get path to purchase request
+router.get(
+  "/purchase-requests/:userId",
+  wholesaleController.getPurchaseRequests
+);
+
 // get path to wholesaler sold products
 router.get("/sold-products/:userId", wholesaleController.getSoldProducts);
 
