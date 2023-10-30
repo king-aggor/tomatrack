@@ -11,7 +11,7 @@ exports.getAvailableProducts = (req, res, next) => {
       // console.log(user.orgName);
       Product.find({
         "farmer.User": { $exists: true },
-        "wholesaler.purchased": false,
+        "wholesaler.orderConfirmed": false,
       })
         .then((products) => {
           // console.log(products);
@@ -38,8 +38,12 @@ exports.getAllProducts = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       const wholesalerId = user._id;
-      Product.find({ "wholesaler.User": wholesalerId })
+      Product.find({
+        "wholesaler.User": wholesalerId,
+        "wholesaler.orderConfirmed": true,
+      })
         .then((products) => {
+          console.log(products);
           res.render("wholesaler/all-products", {
             path: "/wholesaler/all-products",
             role: "wholesaler",
@@ -65,20 +69,21 @@ exports.postBuyProduct = (req, res, next) => {
     .then((wholesalerInfo) => {
       Product.findOne({ batchNum: prodId })
         .then((prod) => {
-          // console.log((prod.price * 20) / 100 + prod.price);
           Product.updateOne(
             { batchNum: prodId },
             {
               $set: {
                 wholesaler: {
                   User: userId,
-                  purchased: true,
+                  ordered: true,
                   wholesaler_name: wholesalerInfo.orgName,
                   location: {
                     country: wholesalerInfo.country,
                     region: wholesalerInfo.region,
                   },
                   price: ((prod.price * 20) / 100 + prod.price).toFixed(2),
+                  ordered: true,
+                  orderConfirmed: false,
                 },
               },
             }
@@ -103,7 +108,7 @@ exports.getPurchasedProducts = (req, res, next) => {
     .then((user) => {
       Product.find({
         "wholesaler.User": wholesalerId,
-        "wholesaler.purchased": true,
+        "wholesaler.orderConfirmed": true,
       })
         .then((products) => {
           res.render("wholesaler/purchased-products", {
