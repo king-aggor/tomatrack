@@ -36,7 +36,7 @@
                     <% if(product.wholesaler.User == user._id.toString()){%>
                       <td class="products-info">Awaiting Confirmation...</td>
                       <td class="products-info">
-                        <form action="/wholesaler/buy-product" method="post">
+                        <form action="/wholesaler/cancel-order" method="post">
                           <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
                           <input type="hidden" value="<%=user._id%>" name="userId">
                           <button class="reject-btn" type="submit">Cancel Order</button>

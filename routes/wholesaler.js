@@ -18,6 +18,9 @@ router.get(
 // post path to buy product
 router.post("/buy-product", wholesaleController.postBuyProduct);
 
+// post path to cancel wholesaler's order
+router.post("/cancel-order", wholesaleController.postCancelOrder);
+
 // get path to wholesaler all products
 router.get("/all-products/:userId", wholesaleController.getAllProducts);
 

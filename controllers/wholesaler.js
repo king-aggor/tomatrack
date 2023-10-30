@@ -3,6 +3,9 @@
 const Product = require("../models/product"); //importing Product model
 const User = require("../models/user"); // importing User model
 
+// core modules
+const crypto = require("crypto"); //importing crypto module
+
 // get all products avilable to wholesaler
 exports.getAvailableProducts = (req, res, next) => {
   const userId = req.params.userId;
@@ -95,6 +98,32 @@ exports.postBuyProduct = (req, res, next) => {
         .catch((err) => {
           console.log(err);
         });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// post cancel order(To cancel wholesaler's placed order)
+exports.postCancelOrder = (req, res, next) => {
+  const batchNum = req.body.batchNum;
+  const userId = req.body.userId;
+
+  Product.updateOne(
+    { "wholesaler.User": userId, batchNum: batchNum },
+    {
+      $set: {
+        wholesaler: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
+      },
+    }
+  )
+    .then((product) => {
+      console.log(product);
+      res.redirect(`available-products/${userId}`);
     })
     .catch((err) => {
       console.log(err);
