@@ -223,6 +223,7 @@ exports.postDeclineOrder = (req, res, next) => {
     {
       $set: {
         wholesaler: {
+          User: crypto.randomBytes(12).toString("hex"),
           ordered: false,
           orderConfirmed: false,
         },
