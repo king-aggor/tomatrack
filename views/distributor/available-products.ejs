@@ -2,7 +2,7 @@
 </head>
 <body>
     <main class="dashboard">
-        <%-include("../includes/distributor-navigation.ejs", {user:user}) %>
+        <%-include("../includes/distributor-navigation.ejs", {user: user}) %>
         <section class="main">
             <%-include("../includes/role.ejs",{stakeholder: user}) %>
             <div class="products-container">
@@ -11,6 +11,7 @@
                 <table class="products-table">
                   <tr class="products-heading-container">
                     <th class="product-heading">Batch No.</th>
+                    <th class="product-heading">Farmer</th>
                     <th class="product-heading">Harvest Date</th>
                     <th class="product-heading">Variety</th>
                     <th class="product-heading">Type Of Fertilizer</th>
@@ -21,6 +22,7 @@
                   <% for(let product of prods){%>
                   <tr class="products-info-container">
                     <td class="products-info"><%= product.batchNum %></td>
+                    <td class="products-info"><%= product.farmer.farmer_name %></td>
                     <td class="products-info"><%= product.harvestDate.toDateString() %></td>
                     <td class="products-info"><%= product.variety %></td>
                     <td class="products-info"><%= product.fertilizer.typeOfFertilizer %></td>
@@ -30,14 +32,25 @@
                         <td class="products-info">-</td>
                       <%}%>
                     <td class="products-info"><%= product.weight %></td>
-                    <td class="products-info">GHc <%= product.wholesaler.price %></td>
-                    <td class="products-info">
-                      <form action="/distributor/buy-product" method="post">
-                        <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
-                        <input type="hidden" value="<%=user._id%>" name="distributorid">
-                        <button class="buy-btn" type="submit">Order</button>
-                      </form>
-                    </td>
+                    <td class="products-info">GHc <%= product.price %></td>
+                    <% if(product.distributor.User == user._id.toString()){%>
+                      <td class="products-info">Awaiting Confirmation...</td>
+                      <td class="products-info">
+                        <form action="/distributor/cancel-order" method="post">
+                          <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
+                          <input type="hidden" value="<%=user._id%>" name="userId">
+                          <button class="reject-btn" type="submit">Cancel Order</button>
+                        </form>
+                      </td>
+                      <%}else{%>
+                        <td class="products-info">
+                          <form action="/distributor/buy-product" method="post">
+                            <input type="hidden" value="<%= product.batchNum %>" name="batchNum">
+                            <input type="hidden" value="<%=user._id%>" name="userId">
+                            <button class="buy-btn" type="submit">Order</button>
+                          </form>
+                        </td>
+                    <%}%>
                   </tr>
                   <% }%>
                 </table>

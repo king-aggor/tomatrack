@@ -34,8 +34,8 @@ exports.getAvailableProducts = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       Product.find({
-        "wholesaler.User": { $exists: true },
-        "distributor.purchased": false,
+        "wholesaler.orderConfirmed": true,
+        "distributor.orderConfirmed": false,
       })
         .then((products) => {
           res.render("distributor/available-products", {
@@ -58,63 +58,10 @@ exports.getAvailableProducts = (req, res, next) => {
 // post buy product
 exports.postBuyProduct = (req, res, next) => {
   const userId = req.body.distributorid;
-  const prodId = req.body.batchNum;
+  const batchNum = req.body.batchNum;
 
-  User.findById(userId)
-    .then((user) => {
-      Product.findOne({ batchNum: prodId })
-        .then((prod) => {
-          // console.log(prod.wholesaler.price);
-          console.log(user.orgName);
-          Product.updateOne(
-            { batchNum: prodId },
-            {
-              $set: {
-                distributor: {
-                  User: userId,
-                  purchased: true,
-                  distributor_name: user.orgName,
-                  location: {
-                    country: user.country,
-                    region: user.region,
-                  },
-                  price: (
-                    (prod.wholesaler.price * 15) / 100 +
-                    prod.wholesaler.price
-                  ).toFixed(2),
-                },
-              },
-            }
-          ).then((product) => {
-            res.redirect(`available-products/${userId}`);
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      // console.log(user.orgName);
-      // Product.updateOne(
-      //   { batchNum: prodId },
-      //   {
-      //     $set: {
-      //       distributor: {
-      //         User: userId,
-      //         purchased: true,
-      //         distributor_name: user.orgName,
-      //         location: {
-      //           country: user.country,
-      //           region: user.region,
-      //         },
-      //       },
-      //     },
-      //   }
-      // ).then((product) => {
-      //   res.redirect(`available-products/${userId}`);
-      // });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  console.log(userId);
+  // res.redirect(`available-products/${userId}`);
 };
 
 // get purchased products
