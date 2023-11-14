@@ -21,6 +21,9 @@ router.get(
 // path to post buy product
 router.post("/buy-product", retailerController.postBuyProduct);
 
+// path to post cancel order
+router.post("/cancel-order", retailerController.postCancelOrder);
+
 // path to get purchased products
 router.get(
   "/purchased-products/:userId",

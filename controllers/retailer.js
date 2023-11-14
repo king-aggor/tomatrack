@@ -2,13 +2,20 @@
 const User = require("../models/user"); //importing User model
 const Product = require("../models/product"); //importing Product model
 
+// core modules
+const crypto = require("crypto"); //importing crypto modules
+
+let retailerId;
 // get all retailer products
 exports.getAllProducts = (req, res, next) => {
   const userId = req.params.userId;
   User.findById(userId)
     .then((user) => {
       const retailerId = user._id;
-      Product.find({ "retailer.User": retailerId })
+      Product.find({
+        "retailer.User": retailerId,
+        "retailer.orderConfirmed": true,
+      })
         .then((products) => {
           // console.log(products);
           res.render("retailer/all-products", {
@@ -30,15 +37,14 @@ exports.getAllProducts = (req, res, next) => {
 
 // get available products for sale
 exports.getAvailableProducts = (req, res, next) => {
-  const userId = req.params.userId;
-  User.findById(userId)
+  retailerId = req.params.userId;
+  User.findById(retailerId)
     .then((user) => {
       Product.find({
-        "distributor.User": { $exists: true },
-        "retailer.purchased": false,
+        "distributor.orderConfirmed": true,
+        "retailer.orderConfirmed": false,
       })
         .then((products) => {
-          // console.log(products);
           res.render("retailer/available-products", {
             path: "/retailer/available-products",
             role: "retailer",
@@ -58,31 +64,41 @@ exports.getAvailableProducts = (req, res, next) => {
 
 // post buy product
 exports.postBuyProduct = (req, res, next) => {
-  const prodId = req.body.prodId;
-  const userId = req.body.userId;
+  const batchNum = req.body.batchNum;
+  const userId = retailerId;
+  // console.log(batchNum, userId);
   User.findById(userId)
     .then((user) => {
-      Product.updateOne(
-        { _id: prodId },
-        {
-          $set: {
-            // "retailer.User": userId,
-            // "retailer.purchased": true,
-            // "retailer.retailer_name": retailer.orgName,
-            retailer: {
-              User: userId,
-              purchased: true,
-              retailer_name: user.orgName,
-              location: {
-                country: user.country,
-                region: user.region,
+      // console.log(user);
+      Product.findOne({ batchNum: batchNum })
+        .then((prod) => {
+          // console.log(product);
+          Product.updateOne(
+            { batchNum: batchNum },
+            {
+              $set: {
+                retailer: {
+                  User: userId,
+                  ordered: true,
+                  retailer_name: user.orgName,
+                  location: {
+                    country: user.country,
+                    region: user.region,
+                  },
+                  price: ((prod.price * 20) / 100 + prod.price).toFixed(2),
+                  ordered: true,
+                  orderConfirmed: false,
+                },
               },
-            },
-          },
-        }
-      )
-        .then((product) => {
-          res.redirect(`available-products/${userId}`);
+            }
+          )
+            .then((product) => {
+              console.log(product);
+              res.redirect(`available-products/${userId}`);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
@@ -93,13 +109,43 @@ exports.postBuyProduct = (req, res, next) => {
     });
 };
 
+// post cancel order
+exports.postCancelOrder = (req, res, next) => {
+  const batchNum = req.body.batchNum;
+  const userId = retailerId;
+
+  Product.updateOne(
+    { "retailer.User": userId, batchNum: batchNum },
+    {
+      $set: {
+        retailer: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
+      },
+    }
+  )
+    .then((product) => {
+      console.log(product);
+      res.redirect(`available-products/${userId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // get purchased products
 exports.getPurchasedProducts = (req, res, next) => {
   const retailerId = req.params.userId;
+  // console.log(retailerId);
   User.findById(retailerId)
     .then((user) => {
       // console.log(user);
-      Product.find({ "retailer.User": retailerId, "retailer.purchased": true })
+      Product.find({
+        "retailer.User": retailerId,
+        "retailer.orderConfirmed": true,
+      })
         .then((products) => {
           res.render("retailer/purchased-products", {
             path: "/retailer/purchased-products",
