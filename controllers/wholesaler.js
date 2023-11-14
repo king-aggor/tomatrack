@@ -6,39 +6,13 @@ const User = require("../models/user"); // importing User model
 // core modules
 const crypto = require("crypto"); //importing crypto module
 
-// get all products avilable to wholesaler
-exports.getAvailableProducts = (req, res, next) => {
-  const userId = req.params.userId;
-  User.findById(userId)
-    .then((user) => {
-      // console.log(user.orgName);
-      Product.find({
-        "farmer.User": { $exists: true },
-        "wholesaler.orderConfirmed": false,
-      })
-        .then((products) => {
-          // console.log(products);
-          res.render("wholesaler/available-products", {
-            path: "/wholesaler/available-products",
-            role: "wholesaler",
-            title: "Available Products",
-            prods: products,
-            user: user,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+let wholesalerId;
 
 // get all products of wholesalers
 exports.getAllProducts = (req, res, next) => {
-  const userId = req.params.userId;
-  User.findById(userId)
+  wholesalerId = req.params.userId;
+  // const userId = wholesalerId;
+  User.findById(wholesalerId)
     .then((user) => {
       const wholesalerId = user._id;
       Product.find({
@@ -64,12 +38,42 @@ exports.getAllProducts = (req, res, next) => {
     });
 };
 
+// get all products avilable to wholesaler
+exports.getAvailableProducts = (req, res, next) => {
+  wholesalerId = req.params.userId;
+  User.findById(wholesalerId)
+    .then((user) => {
+      // console.log(user.orgName);
+      Product.find({
+        "farmer.User": { $exists: true },
+        "wholesaler.orderConfirmed": false,
+      })
+        .then((products) => {
+          // console.log(products);
+          res.render("wholesaler/available-products", {
+            path: "/wholesaler/available-products",
+            role: "wholesaler",
+            title: "Available Products",
+            prods: products,
+            user: user,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // post buy product
 exports.postBuyProduct = (req, res, next) => {
   const prodId = req.body.batchNum;
-  const userId = req.body.userId;
+  const userId = wholesalerId;
+  // console.log(prodId, userId);
   User.findById(userId)
-    .then((wholesalerInfo) => {
+    .then((user) => {
       Product.findOne({ batchNum: prodId })
         .then((prod) => {
           Product.updateOne(
@@ -79,10 +83,10 @@ exports.postBuyProduct = (req, res, next) => {
                 wholesaler: {
                   User: userId,
                   ordered: true,
-                  wholesaler_name: wholesalerInfo.orgName,
+                  wholesaler_name: user.orgName,
                   location: {
-                    country: wholesalerInfo.country,
-                    region: wholesalerInfo.region,
+                    country: user.country,
+                    region: user.region,
                   },
                   price: ((prod.price * 20) / 100 + prod.price).toFixed(2),
                   ordered: true,
@@ -186,6 +190,55 @@ exports.getPurchaseRequests = (req, res, next) => {
     });
 };
 
+// to decline purchase order
+exports.postDeclineOrder = (req, res, next) => {
+  const batchNum = req.body.batchNum;
+  const userId = req.body.userId;
+
+  Product.updateOne(
+    { "wholesaler.User": userId, batchNum: batchNum },
+    {
+      $set: {
+        distributor: {
+          User: crypto.randomBytes(12).toString("hex"),
+          ordered: false,
+          orderConfirmed: false,
+        },
+      },
+    }
+  )
+    .then((product) => {
+      console.log(product);
+      res.redirect(`purchase-requests/${userId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// post confirm order
+exports.postConfirmOrder = (req, res, next) => {
+  const batchNum = req.body.batchNum;
+  const userId = req.body.userId;
+  console.log(batchNum, userId);
+
+  Product.updateOne(
+    { batchNum: batchNum, "wholesaler.User": userId },
+    {
+      $set: {
+        "distributor.orderConfirmed": true,
+      },
+    }
+  )
+    .then((product) => {
+      console.log(product);
+      res.redirect(`/wholesaler/purchase-requests/${userId}`);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 // get products sold by wholesaler
 exports.getSoldProducts = (req, res, next) => {
   const wholesalerId = req.params.userId;
@@ -194,7 +247,7 @@ exports.getSoldProducts = (req, res, next) => {
       const wholesalerId = user._id;
       Product.find({
         "wholesaler.User": wholesalerId,
-        "distributor.purchased": true,
+        "distributor.orderConfirmed": true,
       })
         .then((products) => {
           res.render("wholesaler/sold-products", {
