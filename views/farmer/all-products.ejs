@@ -17,13 +17,13 @@
               <i onclick="closeAddProduct()" id="close-button" class="fa-solid fa-xmark"></i>
             </div>
             <form action='/farmer/add-product' method="post">
-              <div class="input-lable-container">
+              <!-- <div class="input-lable-container">
                 <label for="batchNum">
                   Batch No.
                   <br>
                   <input type="number" name="batchNum" id="batchNum" required>
                 </label>
-              </div>
+              </div> -->
               <div class="input-lable-container">
                 <label for="variety">
                   Variety
@@ -62,6 +62,8 @@
                     <option value="Chemical Fertilizer">Chemical Fertilizer</option>
                   </select>
                 </label><br>
+              </div>
+              <div class="input-lable-container">
                 <label id="npkRatio" for="NPK">NPK Ratio:
                   <br>
                   <input class="npk" type="number" name="n" id="n" placeholder="N">
