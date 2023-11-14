@@ -9,12 +9,17 @@ let userId;
 // post add product( To post farmer's new product)
 exports.postAddProduct = (req, res, next) => {
   // const userId = req.params.userId;
+  // generating random numbers between 1 and 500
+  let x = Math.floor(Math.random() * (900 - 100 + 1) + 100);
+  let batchNum = `TT${x}`;
+
+  // console.log(batchNum);
   User.findById(userId)
     .then((user) => {
       // console.log(user._id.toString());
       let farmerId = user._id;
       Product.create({
-        batchNum: req.body.batchNum,
+        batchNum: batchNum,
         variety: req.body.variety,
         weight: req.body.weight,
         price: req.body.price,
@@ -95,7 +100,7 @@ exports.getFarmerAllProduts = (req, res, next) => {
 // post delete product
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId.toString();
-  console.log(prodId);
+  // console.log(prodId);
   Product.deleteOne({ _id: prodId })
     .then((product) => {
       console.log(product);
