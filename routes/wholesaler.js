@@ -21,6 +21,12 @@ router.post("/buy-product", wholesaleController.postBuyProduct);
 // post path to cancel wholesaler's order
 router.post("/cancel-order", wholesaleController.postCancelOrder);
 
+// post path to decline retailer order
+router.post("/decline-order", wholesaleController.postDeclineOrder);
+
+// post path to confirm order
+router.post("/confirm-order", wholesaleController.postConfirmOrder);
+
 // get path to wholesaler all products
 router.get("/all-products/:userId", wholesaleController.getAllProducts);
 
