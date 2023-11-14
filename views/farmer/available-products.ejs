@@ -14,6 +14,7 @@
                     <th class="product-heading">Harvest Date</th>
                     <th class="product-heading">Variety</th>
                     <th class="product-heading">Weight(kg)</th>
+                    <th class="product-heading">Fertilizer Type</th>
                     <th class="product-heading">Price/kg</th>
                   </tr>
                   <% for(let product of prods){%>
@@ -22,6 +23,7 @@
                     <td class="products-info"><%= product.harvestDate.toDateString()%></td>
                     <td class="products-info"><%= product.variety%></td>
                     <td class="products-info"><%= product.weight%></td>
+                    <td class="products-info"><%= product.fertilizer.typeOfFertilizer%></td>
                     <td class="products-info">GH <%= product.price%></td>
                   </tr>
                   <% }%>
