@@ -17,6 +17,7 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); //importing mongoose
 const dbConnect = require("./util/database"); //importing dbConnect
+require("dotenv").config(); //importing dotenv
 
 const app = express();
 
@@ -66,9 +67,11 @@ app.use("/retailer", retailerRoutes);
 // middleware to use productRoutes
 app.use(productRoutes);
 
+const port = process.env.PORT;
+
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
-  app.listen(3030, () => {
-    console.log("listening on port 3030");
+  app.listen(port, () => {
+    console.log(`listening on port ${port}`);
   });
 });
