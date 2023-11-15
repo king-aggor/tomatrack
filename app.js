@@ -26,20 +26,6 @@ app.set("view engine", "ejs");
 // set views folder
 app.set("views", "views");
 
-// register middleware to store user as a request
-// app.use((req, res, next) => {
-//   User.findUser(1)
-//     .then((user) => {
-//       req.user = user;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
-
-// connect to mongoose
-// dbConnect();
-
 // middleware pointing to public folder( To serve static files )
 app.use(express.static(path.join(__dirname, "public")));
 
