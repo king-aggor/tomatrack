@@ -1,6 +1,9 @@
 // local modules
 const User = require("../models/user"); //importing User class from user model
 
+// third party modules
+const bcrypt = require("bcrypt"); //importing bcrypt
+
 // get registration page
 exports.getRegistration = (req, res, next) => {
   res.render("registerAndLogin/register");
@@ -9,19 +12,28 @@ exports.getRegistration = (req, res, next) => {
 // post registration
 exports.postRegistration = (req, res, next) => {
   // create and store new user
-  User.create({
-    orgName: req.body.name,
-    roles: { User: req.body.role },
-    email: req.body.email,
-    country: req.body.country,
-    region: req.body.region,
-    password: req.body.password,
-  })
-    .then((user) => {
-      console.log(user);
-      const userId = user._id.toString();
-      const role = user.roles.User.toLowerCase();
-      res.redirect(`${role}/all-products/${userId}`);
+  const password = req.body.password;
+  bcrypt
+    .hash(password, 13)
+    .then((passwordHash) => {
+      console.log(hash);
+      User.create({
+        orgName: req.body.name,
+        roles: { User: req.body.role },
+        email: req.body.email,
+        country: req.body.country,
+        region: req.body.region,
+        password: passwordHash,
+      })
+        .then((user) => {
+          console.log(user);
+          const userId = user._id.toString();
+          const role = user.roles.User.toLowerCase();
+          res.redirect(`${role}/all-products/${userId}`);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
