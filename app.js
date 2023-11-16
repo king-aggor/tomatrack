@@ -17,6 +17,8 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose"); //importing mongoose
 const dbConnect = require("./util/database"); //importing dbConnect
+const session = require("express-session"); // importing session
+const { strict } = require("assert");
 require("dotenv").config(); //importing dotenv
 
 const app = express();
@@ -25,6 +27,16 @@ const app = express();
 app.set("view engine", "ejs");
 // set views folder
 app.set("views", "views");
+
+// middleware to use express-session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET_KEY,
+    cookie: {
+      sameSite: "strict",
+    },
+  })
+);
 
 // middleware pointing to public folder( To serve static files )
 app.use(express.static(path.join(__dirname, "public")));
