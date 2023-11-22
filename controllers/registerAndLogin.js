@@ -1,5 +1,6 @@
 // local modules
-const User = require("../models/user"); //importing User class from user model
+const User = require("../models/user"); //importing User model
+const Product = require("../models/product"); //importing product model
 
 // third party modules
 const bcrypt = require("bcrypt"); //importing bcrypt
@@ -42,21 +43,32 @@ exports.postRegistration = (req, res, next) => {
 
 // get login page
 exports.getLogin = (req, res, nex) => {
-  res.render("registerAndLogin/login");
+  if (req.session.authorized) {
+    // res.render(`farmer/all-products`);
+    const user = req.session.user;
+    //user role
+    const role = user.roles.User.toLowerCase();
+    // user _id
+    const userId = user._id;
+    if (role == "farmer") {
+      res.redirect(`farmer/all-products/${userId}`);
+    }
+    if (role == "wholesaler") {
+      res.redirect(`wholesaler/all-products/${userId}`);
+    }
+    if (role == "distributor") {
+      res.redirect(`distributor/all-products/${userId}`);
+    }
+    if (role == "retailer") {
+      res.redirect(`retailer/all-products/${userId}`);
+    }
+  } else {
+    res.render("registerAndLogin/login");
+  }
 };
 
 exports.postLogin = (req, res, next) => {
-  //find a user whose email & password matches user login input
-  //   User.findOne({ email: req.body.email, password: req.body.password })
-  //     .then((user) => {
-  //       const userId = user._id.toString();
-  //       const role = user.roles.User.toLowerCase();
-  //       res.redirect(`${role}/all-products/${userId}`);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // find a user whoses email matches user email input
+  // find a user whose email matches user email input
   User.findOne({ email: req.body.email })
     .then((user) => {
       // console.log user does not exist if email doesnt match any user in DB
@@ -74,6 +86,8 @@ exports.postLogin = (req, res, next) => {
             }
             // if user exist and user input password matches hashed password, redirect to the stakeholder's all-products page
             if (user && password) {
+              req.session.user = user;
+              req.session.authorized = true;
               console.log("Loged in");
               const userId = user._id.toString();
               const role = user.roles.User.toLowerCase();
@@ -88,4 +102,10 @@ exports.postLogin = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+// logout controller
+exports.getLogout = (req, res, next) => {
+  req.session.destroy();
+  res.redirect("/login");
 };
