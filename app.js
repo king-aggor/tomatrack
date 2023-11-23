@@ -32,6 +32,8 @@ app.set("views", "views");
 app.use(
   session({
     secret: process.env.SESSION_SECRET_KEY,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
       sameSite: "strict",
     },
