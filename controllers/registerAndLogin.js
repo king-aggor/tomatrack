@@ -17,7 +17,6 @@ exports.postRegistration = (req, res, next) => {
   bcrypt
     .hash(password, 13)
     .then((passwordHash) => {
-      console.log(hash);
       User.create({
         orgName: req.body.name,
         roles: { User: req.body.role },
