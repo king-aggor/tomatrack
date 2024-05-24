@@ -96,6 +96,11 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "_fertType",
+						"type": "string"
+					},
+					{
 						"internalType": "address payable",
 						"name": "_owner",
 						"type": "address"
@@ -154,6 +159,11 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -188,11 +198,11 @@
 	},
 	"sources": {
 		"contract/Tomatrack.sol": {
-			"keccak256": "0x47570791adf52fdc1272866eefa8db10ab7c0fe2ae6309fcdef415caa05278b9",
+			"keccak256": "0x965b7be9b12e400d29454e3739a7ddaed840d6639b5cffcb3fc73f3fcdd8d3f3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://74fa2f2509b749a318539968980d9776ced8a1acbd35b2ac9ef326dc3906baab",
-				"dweb:/ipfs/QmNbhFidowpfXzQE7ANao9mSgfigHqsE27me81QbgZfU1Q"
+				"bzz-raw://1d429314cc192106d384e52d54d3682e9e43e90b6dbac03eb0864e44f4bb1e0f",
+				"dweb:/ipfs/QmeW97DbJ9C27pJEPjRvssUeSJNvpAopjVs89a9vc3D2Nu"
 			]
 		}
 	},

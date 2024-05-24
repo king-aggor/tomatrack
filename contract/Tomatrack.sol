@@ -11,6 +11,7 @@ contract Tomatrack{
         uint256 quantity;
         uint256 price;
         string variety;
+        string fertType;
         address payable owner;
     }
 
@@ -24,7 +25,7 @@ contract Tomatrack{
     event ProductPurchased(uint256 indexed id, address _seller, uint256 _price);
 
     //function to add new product
-    function addProduct(uint256 _id, string memory _dateOfHarvest, uint256 _quantity, string memory _variety, address payable _owner ) public {
+    function addProduct(uint256 _id, string memory _dateOfHarvest, uint256 _quantity, string memory _variety, string memory _fertType, address payable _owner ) public {
         // save Product as newProduct to memory
         Product memory newProduct;
 
@@ -34,6 +35,7 @@ contract Tomatrack{
         newProduct.quantity = _quantity;
         newProduct.price = 0.1 ether;
         newProduct.variety = _variety;
+        newProduct.fertType = _fertType;
         newProduct.owner = _owner;
 
         // push newProduct to productsOfId
@@ -44,9 +46,9 @@ contract Tomatrack{
     }
 
     // funtion to get product by _id
-    function getProduct(uint256 _id) view public returns( uint256, uint256, string memory, string memory) {
+    function getProduct(uint256 _id) view public returns( uint256, uint256, string memory, string memory, string memory) {
         Product memory prod = productsOfId[_id][0];
-        return(prod.id, prod.price, prod.variety, prod.dateOfHarvest);
+        return(prod.id, prod.price, prod.variety, prod.dateOfHarvest, prod.fertType);
     }
 
 
