@@ -1,10 +1,11 @@
 // third-party modules
 const mongoose = require("mongoose"); //importing mongoose
+require("dotenv").config();
+
+const dBConnectionString = process.env.DB_CONNECTION_STRING;
 
 const dbConnect = mongoose
-  .connect(
-    "mongodb+srv://emma:Kingaggor4ever.@cluster0.etcmdtk.mongodb.net/TomatrackDB"
-  )
+  .connect(dBConnectionString)
   .then(() => {
     console.log("CONNECTED");
   })
