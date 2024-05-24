@@ -1,2 +1,6 @@
 node_modules/
 .prettierignore
+.env
+.hintrc
+.vscode/
+contract/
