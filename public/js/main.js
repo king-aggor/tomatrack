@@ -12,7 +12,7 @@ function closeAddProduct() {
 function displayQRcode() {
   // extract batch number and save to batchNum
   const batchNum = document.getElementById("QRcode-title").innerHTML.split(" ");
-  const ip = "192.168.0.107";
+  const ip = "render";
   var qrc = new QRCode(
     document.getElementById("qrcode"),
     `http://${ip}:3030/product/${batchNum[2]}`
