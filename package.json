@@ -1,7 +1,7 @@
 {
   "name": "tomatrack",
   "version": "1.0.0",
-  "description": "Blockchain Traceability System For Indegineous Tomatoes In Ghana",
+  "description": "Traceability System For Indegineous Tomatoes In Ghana",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
